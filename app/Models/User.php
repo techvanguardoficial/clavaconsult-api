@@ -1,0 +1,62 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
+use Laravel\Sanctum\HasApiTokens;
+
+/**
+ * @mixin IdeHelperUser
+ */
+class User extends Authenticatable
+{
+    use HasApiTokens, HasFactory, Notifiable;
+
+    /**
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'name',
+        'email',
+        'email_verified_at',
+        'password',
+        'admin'
+    ];
+
+    /**
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    /**
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'admin' => 'boolean'
+    ];
+
+    /**
+     * @param $password
+     * @return void
+     */
+    public function setPasswordAttribute($password): void
+    {
+        $this->attributes['password'] = Hash::make($password);
+    }
+
+    /**
+     * @return MorphTo
+     */
+    public function profile(): MorphTo
+    {
+        return $this->morphTo(__FUNCTION__, 'type');
+    }
+}

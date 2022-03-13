@@ -1,0 +1,43 @@
+<?php
+
+namespace App\Providers;
+
+use App\Models\Appointment;
+use App\Models\BlockedTime;
+use App\Models\Doctor;
+use App\Models\Employee;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\ServiceProvider;
+
+class AppServiceProvider extends ServiceProvider
+{
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
+    }
+
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        Relation::enforceMorphMap([
+            'doctor' => Doctor::class,
+            'employee' => Employee::class,
+            'blocked-time' => BlockedTime::class,
+            'appointment' => Appointment::class,
+        ]);
+
+        Http::macro('onmed', function () {
+            return Http::baseUrl(config('import.api_url'))->withHeaders(['origin' => config('import.api_origin')]);
+        });
+    }
+}
