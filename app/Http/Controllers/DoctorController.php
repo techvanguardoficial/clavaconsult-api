@@ -55,6 +55,8 @@ class DoctorController extends Controller
             'email' => ['required', 'string', 'max:255', 'email', 'unique:users'],
             'password' => ['required', 'string', 'max:255'],
             'admin' => ['required', 'boolean'],
+            'cpf' => ['required', 'string', 'max:255', 'unique:doctors'],
+            'council_number' => ['required', 'string', 'max:255', 'unique:doctors'],
             'specialty_id' => ['required', 'exists:specialties,id']
         ]);
 
@@ -88,6 +90,8 @@ class DoctorController extends Controller
             'name' => ['required', 'string', 'min:3', 'max:255'],
             'email' => ['required', 'string', 'max:255', 'email', Rule::unique('users')->ignore($doctor->user->id)],
             'admin' => ['required', 'boolean'],
+            'cpf' => ['required', 'string', 'max:255', 'unique:doctors'],
+            'council_number' => ['required', 'string', 'max:255', 'unique:doctors'],
             'specialty_id' => ['required', 'exists:specialties,id']
         ]);
 
