@@ -55,7 +55,7 @@ class DoctorController extends Controller
             'email' => ['required', 'string', 'max:255', 'email', 'unique:users'],
             'password' => ['required', 'string', 'max:255'],
             'admin' => ['required', 'boolean'],
-            'unit_addresses_id' => ['required', 'int'],
+            'unit_addresses_id' => ['required', 'integer', 'numeric'],
             'cpf' => ['required', 'string', 'max:255', 'unique:doctors'],
             'council_number' => ['required', 'string', 'max:255', 'unique:doctors'],
             'specialty_id' => ['required', 'exists:specialties,id']
