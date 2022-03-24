@@ -134,4 +134,8 @@ Route::middleware('auth:sanctum')->group(function () {
             }
         }
     });
+
+    Route::get('home', function () {
+        return response()->noContent();
+    });
 });
