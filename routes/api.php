@@ -8,6 +8,7 @@ use App\Http\Controllers\CIDController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ImportReportController;
+use App\Http\Controllers\MedicalReportController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\PatientMedicalReportController;
 use App\Http\Controllers\PaymentController;
@@ -134,6 +135,8 @@ Route::middleware('auth:sanctum')->group(function () {
             }
         }
     });
+
+    Route::post('medical-reports', [MedicalReportController::class, 'store']);
 
     Route::get('home', function () {
         return response()->noContent();
