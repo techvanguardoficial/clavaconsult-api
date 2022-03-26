@@ -20,11 +20,11 @@ class MedicalReportController extends Controller
         $appointmentQuery = Appointment::query();
         $appointmentQuery->whereHas('event', function (Builder $query) use ($request) {
             $query->where('doctor_id', $request->input('doctor_id'));
-            $query->where('date', (now())->toDateString());
+            $query->where('date', (now())->tz('America/Sao_Paulo')->toDateString());
         });
 
         $appointmentQuery->where('patient_id', $request->input('patient_id'));
-        $appointmentQuery->where('status', 1);
+        $appointmentQuery->whereIn('status', [1, 2, 3, 12]);
 
         $appointment = $appointmentQuery->first();
 
