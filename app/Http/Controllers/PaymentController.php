@@ -26,7 +26,7 @@ class PaymentController extends Controller
         });
 
         $dbQuery->whereHas('appointment.event', function (Builder $query) use ($request) {
-            $query->where('date', $request->query('date'));
+            $query->whereBetween('date', [$request->query('start'), $request->query('end')]);
         });
 
         return PaymentResource::collection($dbQuery->cursorPaginate(25));
