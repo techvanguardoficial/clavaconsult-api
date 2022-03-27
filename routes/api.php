@@ -141,4 +141,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('home', function () {
         return response()->noContent();
     });
+
+    Route::post('/new-import', function () {
+        return  'hi, works.';
+    });
 });
