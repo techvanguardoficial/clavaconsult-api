@@ -17,6 +17,7 @@ class Doctor extends Model
     use HasFactory;
 
     protected $fillable = [
+        'unit_addresses_id',
         'cpf',
         'council_type',
         'council_number',

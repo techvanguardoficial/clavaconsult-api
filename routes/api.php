@@ -17,6 +17,7 @@ use App\Http\Controllers\ReportConfigController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SpecialtyController;
 use App\Http\Controllers\UpdatePasswordController;
+use App\Http\Controllers\UnitAddressesController;
 use App\Http\Resources\UserResource;
 use App\Models\Appointment;
 use App\Models\Doctor;
@@ -26,6 +27,7 @@ use App\Models\Patient;
 use App\Models\Plan;
 use App\Models\ReportTab;
 use App\Models\Specialty;
+use App\Models\UnitAddress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -53,6 +55,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/specialties', [SpecialtyController::class, 'store'])->can('create', Specialty::class);
     Route::put('/specialties/{specialty}', [SpecialtyController::class, 'update'])->can('update', Specialty::class);
     Route::delete('/specialties/{specialty}', [SpecialtyController::class, 'destroy'])->can('delete', Specialty::class);
+
+    Route::get('/unit-adresses', [UnitAddressesController::class, 'index'])->can('viewAny', UnitAddress::class);
 
     Route::get('/plans', [PlanController::class, 'index'])->can('viewAny', Plan::class);
     Route::get('/plans/{plan}', [PlanController::class, 'show'])->can('view', Plan::class);
