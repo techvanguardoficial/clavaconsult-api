@@ -23,7 +23,10 @@ class DoctorResource extends JsonResource
             'email' => $this->user->email,
             'role' => $this->user->type,
             'admin' => $this->user->admin,
-            'specialty' => $this->specialty
+            'specialty' => $this->specialty,
+            'cpf' => $this->cpf,
+            'council_type' => $this->council_type,
+            'council_number' => $this->council_number
         ];
     }
 }
