@@ -29,6 +29,6 @@ class PaymentController extends Controller
             $query->whereBetween('date', [$request->query('start'), $request->query('end')]);
         });
 
-        return PaymentResource::collection($dbQuery->cursorPaginate(25));
+        return PaymentResource::collection($dbQuery->get());
     }
 }
