@@ -92,6 +92,7 @@ class DoctorController extends Controller
             'email' => ['required', 'string', 'max:255', 'email', Rule::unique('users')->ignore($doctor->user->id)],
             'admin' => ['required', 'boolean'],
             'cpf' => ['required', 'string', 'max:255', 'unique:doctors'],
+            'council_type' => ['required', 'string', 'max:255'],
             'council_number' => ['required', 'string', 'max:255', 'unique:doctors'],
             'specialty_id' => ['required', 'exists:specialties,id']
         ]);
