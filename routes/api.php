@@ -4,9 +4,11 @@ use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\AppointmentMedicalReportController;
 use App\Http\Controllers\AppointmentStatusController;
 use App\Http\Controllers\BlockedTimeController;
+use App\Http\Controllers\CIDController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ImportReportController;
+use App\Http\Controllers\MedicalReportController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\PatientMedicalReportController;
 use App\Http\Controllers\PaymentController;
@@ -119,6 +121,8 @@ Route::middleware('auth:sanctum')->group(function () {
     // Importação de dados.
     Route::post('import', [ImportReportController::class, 'import']);
 
+    Route::get('cids', [CIDController::class, 'index']);
+
     Route::post('load', function () {
         $doctors = Doctor::all();
 
@@ -134,5 +138,15 @@ Route::middleware('auth:sanctum')->group(function () {
                 $tab->reportFields()->createMany($tabConfig['fields']);
             }
         }
+    });
+
+    Route::post('medical-reports', [MedicalReportController::class, 'store']);
+
+    Route::get('home', function () {
+        return response()->noContent();
+    });
+
+    Route::post('/new-import', function () {
+        return  'hi, works.';
     });
 });

@@ -19,6 +19,7 @@ class Doctor extends Model
     protected $fillable = [
         'unit_addresses_id',
         'cpf',
+        'council_type',
         'council_number',
         'specialty_id',
     ];
