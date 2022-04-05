@@ -65,4 +65,9 @@ class Doctor extends Model
     {
         return $this->hasManyThrough(ReportField::class, ReportTab::class);
     }
+
+    public function unitAddress(): BelongsTo
+    {
+        return $this->belongsTo(UnitAddress::class, 'unit_addresses_id');
+    }
 }
