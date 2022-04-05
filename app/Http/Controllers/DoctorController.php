@@ -95,7 +95,8 @@ class DoctorController extends Controller
             'cpf' => ['required', 'string', 'max:255', Rule::unique('doctors')->ignore($doctor->id)],
             'council_type' => ['required', 'string', 'max:255'],
             'council_number' => ['required', 'string', 'max:255', Rule::unique('doctors')->ignore($doctor->id)],
-            'specialty_id' => ['required', 'exists:specialties,id']
+            'specialty_id' => ['required', 'exists:specialties,id'],
+            'unit_addresses_id' => ['required', 'integer', 'numeric']
         ]);
 
         $doctor->update($input);
