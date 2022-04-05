@@ -8,6 +8,7 @@ use App\Http\Controllers\CIDController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ImportReportController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\MedicalReportController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\PatientMedicalReportController;
@@ -149,4 +150,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/new-import', function () {
         return  'hi, works.';
     });
+
+    Route::get('/invoice', [InvoiceController::class, 'show']);
 });
