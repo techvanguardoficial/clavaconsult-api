@@ -26,7 +26,8 @@ class DoctorResource extends JsonResource
             'specialty' => $this->specialty,
             'cpf' => $this->cpf,
             'council_type' => $this->council_type,
-            'council_number' => $this->council_number
+            'council_number' => $this->council_number,
+            'unit_addresses_id' => $this->unit_addresses_id
         ];
     }
 }

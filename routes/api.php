@@ -150,6 +150,4 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/new-import', function () {
         return  'hi, works.';
     });
-
-    Route::get('/invoice', [InvoiceController::class, 'show']);
 });

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointment;
-use Barryvdh\DomPDF\Facade\PDF;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
