@@ -34,7 +34,7 @@ class AppointmentMedicalReportController extends Controller
 
             'fields' => ['required', 'array'],
             'fields.*.report_field_id' => ['required', 'numeric', 'integer', 'exists:report_fields,id'],
-            'fields.*.value' => ['required', 'string', 'max:1000'],
+            'fields.*.value' => ['required', 'string', 'max:4294967295'],
 
             'status' => ['required', 'string', 'in:committed']
         ]);
