@@ -4,6 +4,8 @@
 /storage/*.key
 /vendor
 .env
+.env.local
+.env.production
 .env.backup
 .phpunit.result.cache
 docker-compose.yml
@@ -17,3 +19,8 @@ yarn-error.log
 .phpstorm.meta.php
 _ide_helper.php
 _ide_helper_models.php
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
