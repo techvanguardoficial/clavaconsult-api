@@ -7,8 +7,6 @@ use App\Http\Controllers\BlockedTimeController;
 use App\Http\Controllers\CIDController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\ImportReportController;
-use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\MedicalReportController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\PatientMedicalReportController;
@@ -17,21 +15,26 @@ use App\Http\Controllers\PlanController;
 use App\Http\Controllers\ReportConfigController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SpecialtyController;
-use App\Http\Controllers\UpdatePasswordController;
 use App\Http\Controllers\UnitAddressesController;
+use App\Http\Controllers\UpdatePasswordController;
 use App\Http\Resources\UserResource;
+use App\Jobs\ImportReportsFromJson;
 use App\Models\Appointment;
 use App\Models\Doctor;
 use App\Models\Employee;
 use App\Models\MedicalReport;
 use App\Models\Patient;
 use App\Models\Plan;
-use App\Models\ReportTab;
 use App\Models\Specialty;
 use App\Models\UnitAddress;
+use App\Models\User;
+use App\Notifications\ImportReportsCompleted;
+use App\Notifications\ImportReportsFailed;
+use Illuminate\Bus\Batch;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Bus;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,8 +51,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
         return new UserResource($request->user());
     });
-
-    // Route::get('user', fn(Request $request) => new UserResource($request->user()));
 
     Route::get('/specialties', [SpecialtyController::class, 'index'])->can('viewAny', Specialty::class);
     Route::get('/specialties/{specialty}', [SpecialtyController::class, 'show'])->can('view', Specialty::class);
@@ -119,27 +120,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // Retorna configurações do prontuário para o médico.
     Route::get('doctors/{doctor}/report-config', [ReportConfigController::class, 'show']);
 
-    // Importação de dados.
-    Route::post('import', [ImportReportController::class, 'import']);
-
     Route::get('cids', [CIDController::class, 'index']);
-
-    Route::post('load', function () {
-        $doctors = Doctor::all();
-
-        foreach ($doctors as $doctor) {
-            $config = json_decode(Storage::get('doctor_report_config.json'), true);
-
-            foreach ($config['tabs'] as $tabConfig) {
-                $tab = new ReportTab($tabConfig);
-
-                $tab->doctor()->associate($doctor);
-                $tab->save();
-
-                $tab->reportFields()->createMany($tabConfig['fields']);
-            }
-        }
-    });
 
     Route::post('medical-reports', [MedicalReportController::class, 'store']);
 
@@ -147,7 +128,22 @@ Route::middleware('auth:sanctum')->group(function () {
         return response()->noContent();
     });
 
-    Route::post('/new-import', function () {
-        return  'hi, works.';
+    Route::post('/import', function () {
+        $doctors = collect([7, 10, 11, 13, 18, 22, 26]);
+
+        Bus::batch($doctors->map(fn($doctor) => new ImportReportsFromJson($doctor)))
+            ->then(function (Batch $batch) {
+                $users = User::whereIn('id', [2, 10])->get();
+
+                Notification::send($users, new ImportReportsCompleted($batch));
+            })
+            ->catch(function (Batch $batch) {
+                $users = User::whereIn('id', [2, 10])->get();
+
+                Notification::send($users, new ImportReportsFailed($batch));
+            })
+            ->dispatch();
+
+        return 'Ok.';
     });
 });

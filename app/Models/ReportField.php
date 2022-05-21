@@ -20,6 +20,10 @@ class ReportField extends Model
         'columns'
     ];
 
+    protected $casts = [
+        'hidden' => 'boolean'
+    ];
+
     public function reportTab(): BelongsTo
     {
         return $this->belongsTo(ReportTab::class);

@@ -21,7 +21,8 @@ class ReportFieldResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'type' => $this->type,
-            'columns' => $this->columns
+            'columns' => $this->columns,
+            'hidden' => $this->hidden
         ];
     }
 }

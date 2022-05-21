@@ -14,7 +14,7 @@ class AddCouncilTypeColumnToDoctorsTable extends Migration
     public function up()
     {
         Schema::table('doctors', function (Blueprint $table) {
-            $table->string('council_type')->nullable()->after('cpf')->unique();
+            $table->string('council_type')->nullable()->after('cpf');
         });
     }
 

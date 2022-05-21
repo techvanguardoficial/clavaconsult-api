@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Appointment;
 use App\Models\Event;
-use App\Models\MedicalReport;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
