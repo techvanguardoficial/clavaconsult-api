@@ -62,8 +62,12 @@ class ImportReportsFromJson implements ShouldQueue, ShouldBeUnique
         foreach ($this->reports as $report) {
             $patient = Patient::where('old_id', $report['idpaciente'])->first();
 
-            if (is_null($patient) || !array_key_exists('campos', $report)) {
+            if (is_null($patient)) {
                 $failed[] = $report;
+                continue;
+            }
+
+            if (!array_key_exists('campos', $report)) {
                 continue;
             }
 
