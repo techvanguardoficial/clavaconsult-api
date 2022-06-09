@@ -25,6 +25,7 @@ use App\Models\Employee;
 use App\Models\MedicalReport;
 use App\Models\Patient;
 use App\Models\Plan;
+use App\Models\ReportTab;
 use App\Models\Specialty;
 use App\Models\UnitAddress;
 use App\Models\User;
@@ -35,6 +36,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -145,5 +147,21 @@ Route::middleware('auth:sanctum')->group(function () {
             ->dispatch();
 
         return 'Ok.';
+    });
+
+    Route::get('/ajustar-medicos', function () {
+        $config = json_decode(Storage::get('doctor_report_config.json'), true);
+        $doctors = Doctor::whereIn('id', [40, 41, 42, 43])->get();
+
+        foreach ($doctors as $doctor) {
+            foreach ($config['tabs'] as $tabConfig) {
+                $tab = new ReportTab($tabConfig);
+
+                $tab->doctor()->associate($doctor);
+                $tab->save();
+
+                $tab->reportFields()->createMany($tabConfig['fields']);
+            }
+        }
     });
 });
