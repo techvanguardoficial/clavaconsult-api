@@ -31,6 +31,9 @@ class DoctorController extends Controller
             });
         }
 
+        // Remove da consulta IDs de médicos que não atendem mais (SOLUÇÃO TEMPORÁRIA)
+        $dbQuery->whereNotIn('id', [18, 19, 24, 41, 23, 6, 45]);
+
         return DoctorResource::collection($dbQuery->cursorPaginate(25)->withQueryString());
     }
 
