@@ -110,6 +110,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/patients/{patient}/medical-history', [PatientMedicalReportController::class, 'index']);//->can('viewAny', MedicalReport::class);
 
+    /* Pega as siglas dos conselhos para mostrar no select list de cadastro de medicos e edição*/
+
+    Route::get('/councils', [CouncilController::class, 'index']);
+
     /* RELATÓRIOS MÉDICOS TERMINAM AQUI */
 
     Route::get('/doctors/{doctor}/payments', [PaymentController::class, 'index']);
@@ -153,4 +157,3 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 });
 
-Route::get('/councils', [CouncilController::class, 'index']);
