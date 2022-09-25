@@ -5,6 +5,7 @@ use App\Http\Controllers\AppointmentMedicalReportController;
 use App\Http\Controllers\AppointmentStatusController;
 use App\Http\Controllers\BlockedTimeController;
 use App\Http\Controllers\CIDController;
+use App\Http\Controllers\CouncilController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ImportReportController;
@@ -151,3 +152,5 @@ Route::middleware('auth:sanctum')->group(function () {
         return  'hi, works.';
     });
 });
+
+Route::get('/councils', [CouncilController::class, 'index']);
