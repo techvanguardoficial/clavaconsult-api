@@ -5,6 +5,7 @@ use App\Http\Controllers\AppointmentMedicalReportController;
 use App\Http\Controllers\AppointmentStatusController;
 use App\Http\Controllers\BlockedTimeController;
 use App\Http\Controllers\CIDController;
+use App\Http\Controllers\CouncilController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\MedicalReportController;
@@ -112,6 +113,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/patients/{patient}/medical-history', [PatientMedicalReportController::class, 'index']);//->can('viewAny', MedicalReport::class);
 
+    /* Pega as siglas dos conselhos para mostrar no select list de cadastro de medicos e edição*/
+
+    Route::get('/councils', [CouncilController::class, 'index']);
+
     /* RELATÓRIOS MÉDICOS TERMINAM AQUI */
 
     Route::get('/doctors/{doctor}/payments', [PaymentController::class, 'index']);
@@ -165,3 +170,4 @@ Route::middleware('auth:sanctum')->group(function () {
         }
     });
 });
+
