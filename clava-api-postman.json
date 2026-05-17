@@ -1,0 +1,1150 @@
+{
+  "info": {
+    "name": "Clava API",
+    "description": "Coleção completa de rotas da API Clava - Sistema de Agendamento Médico",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"password\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/login",
+              "host": ["{{base_url}}"],
+              "path": ["login"]
+            }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/logout",
+              "host": ["{{base_url}}"],
+              "path": ["logout"]
+            }
+          }
+        },
+        {
+          "name": "Get Current User",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/user",
+              "host": ["{{base_url}}"],
+              "path": ["user"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Specialties (Especialidades)",
+      "item": [
+        {
+          "name": "List Specialties",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/specialties",
+              "host": ["{{base_url}}"],
+              "path": ["specialties"]
+            }
+          }
+        },
+        {
+          "name": "Get Specialty",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/specialties/:id",
+              "host": ["{{base_url}}"],
+              "path": ["specialties", ":id"]
+            }
+          }
+        },
+        {
+          "name": "Create Specialty",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Cardiologia\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/specialties",
+              "host": ["{{base_url}}"],
+              "path": ["specialties"]
+            }
+          }
+        },
+        {
+          "name": "Update Specialty",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Cardiologia Clínica\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/specialties/:id",
+              "host": ["{{base_url}}"],
+              "path": ["specialties", ":id"]
+            }
+          }
+        },
+        {
+          "name": "Delete Specialty",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/specialties/:id",
+              "host": ["{{base_url}}"],
+              "path": ["specialties", ":id"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Plans (Planos)",
+      "item": [
+        {
+          "name": "List Plans",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/plans",
+              "host": ["{{base_url}}"],
+              "path": ["plans"]
+            }
+          }
+        },
+        {
+          "name": "Get Plan",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/plans/:id",
+              "host": ["{{base_url}}"],
+              "path": ["plans", ":id"]
+            }
+          }
+        },
+        {
+          "name": "Create Plan",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Plano Ouro\",\n  \"description\": \"Plano com cobertura total\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/plans",
+              "host": ["{{base_url}}"],
+              "path": ["plans"]
+            }
+          }
+        },
+        {
+          "name": "Update Plan",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Plano Platinum\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/plans/:id",
+              "host": ["{{base_url}}"],
+              "path": ["plans", ":id"]
+            }
+          }
+        },
+        {
+          "name": "Delete Plan",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/plans/:id",
+              "host": ["{{base_url}}"],
+              "path": ["plans", ":id"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Doctors (Médicos)",
+      "item": [
+        {
+          "name": "List Doctors",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/doctors",
+              "host": ["{{base_url}}"],
+              "path": ["doctors"]
+            }
+          }
+        },
+        {
+          "name": "Get Doctor",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/doctors/:id",
+              "host": ["{{base_url}}"],
+              "path": ["doctors", ":id"]
+            }
+          }
+        },
+        {
+          "name": "Create Doctor",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Dr. João Silva\",\n  \"email\": \"joao@example.com\",\n  \"council\": \"CRM\",\n  \"council_number\": \"123456\",\n  \"specialty_id\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/doctors",
+              "host": ["{{base_url}}"],
+              "path": ["doctors"]
+            }
+          }
+        },
+        {
+          "name": "Update Doctor",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Dr. João Silva Atualizado\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/doctors/:id",
+              "host": ["{{base_url}}"],
+              "path": ["doctors", ":id"]
+            }
+          }
+        },
+        {
+          "name": "Delete Doctor",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/doctors/:id",
+              "host": ["{{base_url}}"],
+              "path": ["doctors", ":id"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Employees (Funcionários)",
+      "item": [
+        {
+          "name": "List Employees",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/employees",
+              "host": ["{{base_url}}"],
+              "path": ["employees"]
+            }
+          }
+        },
+        {
+          "name": "Get Employee",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/employees/:id",
+              "host": ["{{base_url}}"],
+              "path": ["employees", ":id"]
+            }
+          }
+        },
+        {
+          "name": "Create Employee",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Maria Silva\",\n  \"email\": \"maria@example.com\",\n  \"role\": \"Recepcionista\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/employees",
+              "host": ["{{base_url}}"],
+              "path": ["employees"]
+            }
+          }
+        },
+        {
+          "name": "Update Employee",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Maria Silva Santos\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/employees/:id",
+              "host": ["{{base_url}}"],
+              "path": ["employees", ":id"]
+            }
+          }
+        },
+        {
+          "name": "Delete Employee",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/employees/:id",
+              "host": ["{{base_url}}"],
+              "path": ["employees", ":id"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Patients (Pacientes)",
+      "item": [
+        {
+          "name": "List Patients",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/patients",
+              "host": ["{{base_url}}"],
+              "path": ["patients"]
+            }
+          }
+        },
+        {
+          "name": "Get Patient",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/patients/:id",
+              "host": ["{{base_url}}"],
+              "path": ["patients", ":id"]
+            }
+          }
+        },
+        {
+          "name": "Create Patient",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Carlos Oliveira\",\n  \"email\": \"carlos@example.com\",\n  \"cpf\": \"12345678900\",\n  \"date_of_birth\": \"1990-05-15\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/patients",
+              "host": ["{{base_url}}"],
+              "path": ["patients"]
+            }
+          }
+        },
+        {
+          "name": "Update Patient",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Carlos Mendes Oliveira\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/patients/:id",
+              "host": ["{{base_url}}"],
+              "path": ["patients", ":id"]
+            }
+          }
+        },
+        {
+          "name": "Delete Patient",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/patients/:id",
+              "host": ["{{base_url}}"],
+              "path": ["patients", ":id"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Appointments (Agendamentos)",
+      "item": [
+        {
+          "name": "List Doctor Appointments",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/doctors/:doctor_id/appointments",
+              "host": ["{{base_url}}"],
+              "path": ["doctors", ":doctor_id", "appointments"]
+            }
+          }
+        },
+        {
+          "name": "Get Appointment",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/appointments/:id",
+              "host": ["{{base_url}}"],
+              "path": ["appointments", ":id"]
+            }
+          }
+        },
+        {
+          "name": "Create Appointment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"patient_id\": 1,\n  \"appointment_date\": \"2025-06-15\",\n  \"appointment_time\": \"10:00\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/doctors/:doctor_id/appointments",
+              "host": ["{{base_url}}"],
+              "path": ["doctors", ":doctor_id", "appointments"]
+            }
+          }
+        },
+        {
+          "name": "Update Appointment",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"appointment_date\": \"2025-06-16\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/appointments/:id",
+              "host": ["{{base_url}}"],
+              "path": ["appointments", ":id"]
+            }
+          }
+        },
+        {
+          "name": "Delete Appointment",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/appointments/:id",
+              "host": ["{{base_url}}"],
+              "path": ["appointments", ":id"]
+            }
+          }
+        },
+        {
+          "name": "Update Appointment Status",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"confirmed\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/appointments/:id/status",
+              "host": ["{{base_url}}"],
+              "path": ["appointments", ":id", "status"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Unavailable Times (Indisponibilidades)",
+      "item": [
+        {
+          "name": "List Unavailable Times",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/unavailable-times",
+              "host": ["{{base_url}}"],
+              "path": ["unavailable-times"]
+            }
+          }
+        },
+        {
+          "name": "Get Unavailable Time",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/unavailable-times/:id",
+              "host": ["{{base_url}}"],
+              "path": ["unavailable-times", ":id"]
+            }
+          }
+        },
+        {
+          "name": "Create Unavailable Time",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"start_date\": \"2025-06-15\",\n  \"start_time\": \"10:00\",\n  \"end_date\": \"2025-06-15\",\n  \"end_time\": \"12:00\",\n  \"reason\": \"Folga agendada\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/doctors/:doctor_id/unavailable-times",
+              "host": ["{{base_url}}"],
+              "path": ["doctors", ":doctor_id", "unavailable-times"]
+            }
+          }
+        },
+        {
+          "name": "Update Unavailable Time",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"Folga modificada\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/unavailable-times/:id",
+              "host": ["{{base_url}}"],
+              "path": ["unavailable-times", ":id"]
+            }
+          }
+        },
+        {
+          "name": "Delete Unavailable Time",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/unavailable-times/:id",
+              "host": ["{{base_url}}"],
+              "path": ["unavailable-times", ":id"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Medical Reports (Prontuários)",
+      "item": [
+        {
+          "name": "Get Appointment Medical Report",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/appointments/:appointment_id/medical-report",
+              "host": ["{{base_url}}"],
+              "path": ["appointments", ":appointment_id", "medical-report"]
+            }
+          }
+        },
+        {
+          "name": "Create Appointment Medical Report",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"diagnosis\": \"Hipertensão\",\n  \"notes\": \"Paciente apresenta sintomas de hipertensão\",\n  \"prescription\": \"Losartana 50mg\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/appointments/:appointment_id/medical-report",
+              "host": ["{{base_url}}"],
+              "path": ["appointments", ":appointment_id", "medical-report"]
+            }
+          }
+        },
+        {
+          "name": "Update Appointment Medical Report",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"diagnosis\": \"Hipertensão Controlada\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/appointments/:appointment_id/medical-report",
+              "host": ["{{base_url}}"],
+              "path": ["appointments", ":appointment_id", "medical-report"]
+            }
+          }
+        },
+        {
+          "name": "Delete Appointment Medical Report",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/appointments/:appointment_id/medical-report",
+              "host": ["{{base_url}}"],
+              "path": ["appointments", ":appointment_id", "medical-report"]
+            }
+          }
+        },
+        {
+          "name": "Get Patient Medical History",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/patients/:patient_id/medical-history",
+              "host": ["{{base_url}}"],
+              "path": ["patients", ":patient_id", "medical-history"]
+            }
+          }
+        },
+        {
+          "name": "Create Medical Report",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"patient_id\": 1,\n  \"doctor_id\": 1,\n  \"diagnosis\": \"Infecção respiratória\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/medical-reports",
+              "host": ["{{base_url}}"],
+              "path": ["medical-reports"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Doctor Schedule (Agenda)",
+      "item": [
+        {
+          "name": "Get Doctor Schedule",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/doctors/:doctor_id/schedule",
+              "host": ["{{base_url}}"],
+              "path": ["doctors", ":doctor_id", "schedule"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Other Resources",
+      "item": [
+        {
+          "name": "List Unit Addresses",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/unit-adresses",
+              "host": ["{{base_url}}"],
+              "path": ["unit-adresses"]
+            }
+          }
+        },
+        {
+          "name": "List Councils",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/councils",
+              "host": ["{{base_url}}"],
+              "path": ["councils"]
+            }
+          }
+        },
+        {
+          "name": "Get Doctor Report Config",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/doctors/:doctor_id/report-config",
+              "host": ["{{base_url}}"],
+              "path": ["doctors", ":doctor_id", "report-config"]
+            }
+          }
+        },
+        {
+          "name": "List CIDs",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/cids",
+              "host": ["{{base_url}}"],
+              "path": ["cids"]
+            }
+          }
+        },
+        {
+          "name": "Get Doctor Payments",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/doctors/:doctor_id/payments",
+              "host": ["{{base_url}}"],
+              "path": ["doctors", ":doctor_id", "payments"]
+            }
+          }
+        },
+        {
+          "name": "Update User Password",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"current_password\": \"old_password\",\n  \"password\": \"new_password\",\n  \"password_confirmation\": \"new_password\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/users/:user_id/password",
+              "host": ["{{base_url}}"],
+              "path": ["users", ":user_id", "password"]
+            }
+          }
+        },
+        {
+          "name": "Home",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/home",
+              "host": ["{{base_url}}"],
+              "path": ["home"]
+            }
+          }
+        },
+        {
+          "name": "Import Reports",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/import",
+              "host": ["{{base_url}}"],
+              "path": ["import"]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000/api",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
