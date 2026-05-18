@@ -34,6 +34,7 @@ class AppServiceProvider extends ServiceProvider
             'employee' => Employee::class,
             'blocked-time' => BlockedTime::class,
             'appointment' => Appointment::class,
+            'user' => \App\Models\User::class,
         ]);
 
         Http::macro('onmed', function () {

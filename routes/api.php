@@ -3,6 +3,7 @@
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\AppointmentMedicalReportController;
 use App\Http\Controllers\AppointmentStatusController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlockedTimeController;
 use App\Http\Controllers\CIDController;
 use App\Http\Controllers\CouncilController;
@@ -50,7 +51,11 @@ use Illuminate\Support\Facades\Storage;
 |
 */
 
+// Rotas públicas (sem autenticação)
+Route::post('/login', [AuthController::class, 'login']);
+
 Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/user', function (Request $request) {
         return new UserResource($request->user());
     });
