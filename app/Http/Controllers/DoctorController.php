@@ -24,15 +24,25 @@ class DoctorController extends Controller
     {
         $dbQuery = Doctor::query();
 
-        if ($request->query('search')) {
-            $dbQuery->whereHas('user', function (Builder $dbQuery) use ($request) {
-                $dbQuery->where('name', 'like', sprintf('%s%%', $request->query('search')));
-                $dbQuery->orWhere('email', 'like', sprintf('%s%%', $request->query('search')));
+        if ($search = $request->query('search')) {
+            $like = '%' . $search . '%';
+            $digits = preg_replace('/\D+/', '', $search);
+
+            $dbQuery->where(function (Builder $query) use ($like, $digits) {
+                $query->whereHas('user', function (Builder $userQuery) use ($like) {
+                    $userQuery->where('name', 'like', $like)
+                        ->orWhere('email', 'like', $like);
+                });
+
+                $query->orWhere('council_number', 'like', $like);
+
+                if ($digits !== '') {
+                    $digitsLike = '%' . $digits . '%';
+
+                    $query->orWhereRaw("REPLACE(REPLACE(REPLACE(cpf, '.', ''), '-', ''), '/', '') LIKE ?", [$digitsLike]);
+                }
             });
         }
-
-        // Remove da consulta IDs de médicos que não atendem mais (SOLUÇÃO TEMPORÁRIA)
-        $dbQuery->whereNotIn('id', [18, 19, 24, 41, 23, 6, 45]);
 
         $perPage = min((int) $request->query('per_page', 25), 100);
 

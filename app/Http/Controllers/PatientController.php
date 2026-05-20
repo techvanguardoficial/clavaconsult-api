@@ -20,11 +20,21 @@ class PatientController extends Controller
     {
         $dbQuery = Patient::query();
 
-        if ($request->query('search')) {
-            $dbQuery->where('name', 'like', sprintf('%s%%', $request->query('search')));
-            $dbQuery->orWhere('document', 'like', sprintf('%s%%', $request->query('search')));
-            $dbQuery->orWhere('phone', 'like', sprintf('%s%%', $request->query('search')));
-            $dbQuery->orWhere('email', 'like', sprintf('%s%%', $request->query('search')));
+        if ($search = $request->query('search')) {
+            $like = '%' . $search . '%';
+            $digits = preg_replace('/\D+/', '', $search);
+
+            $dbQuery->where(function ($query) use ($like, $digits) {
+                $query->where('name', 'like', $like)
+                    ->orWhere('email', 'like', $like);
+
+                if ($digits !== '') {
+                    $digitsLike = '%' . $digits . '%';
+
+                    $query->orWhereRaw("REPLACE(REPLACE(REPLACE(document, '.', ''), '-', ''), '/', '') LIKE ?", [$digitsLike])
+                        ->orWhereRaw("REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(phone, '(', ''), ')', ''), '-', ''), ' ', ''), '+', '') LIKE ?", [$digitsLike]);
+                }
+            });
         }
 
         return PatientResource::collection($dbQuery->cursorPaginate(25)->withQueryString());
