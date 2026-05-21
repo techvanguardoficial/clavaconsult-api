@@ -24,7 +24,7 @@ class SpecialtyController extends Controller
 
         $specialties->orderBy('name');
 
-        return SpecialtyResource::collection($specialties->cursorPaginate(25)->withQueryString());
+        return SpecialtyResource::collection($specialties->get());
     }
 
     /**

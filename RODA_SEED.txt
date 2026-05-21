@@ -1,0 +1,7 @@
+./vendor/bin/sail artisan migrate --path=database/migrations/2026_05_19_120000_add_soft_deletes_to_doctors_table.php
+
+ ./vendor/bin/sail artisan migrate --path=database/migrations/2026_05_19_120100_soft_delete_inactive_doctors.php
+
+./vendor/bin/sail artisan migrate --path=database/migrations/2022_09_24_213801_create_councils_table.php
+
+ ./vendor/bin/sail artisan migrate --path=database/migrations/2026_05_21_000000_add_description_column_to_councils_table.php
