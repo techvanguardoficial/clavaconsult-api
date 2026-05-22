@@ -17,6 +17,6 @@ class CIDController extends Controller
             $cids->where('description', 'like', sprintf('%%%s%%', $request->query('search')));
         }
 
-        return CIDResource::collection($cids->cursorPaginate(25)->withQueryString());
+        return CIDResource::collection($cids->get());
     }
 }
