@@ -19,6 +19,7 @@ use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SpecialtyController;
 use App\Http\Controllers\UnitAddressesController;
 use App\Http\Controllers\UpdatePasswordController;
+use App\Http\Controllers\WorkTimeController;
 use App\Http\Resources\UserResource;
 use App\Jobs\ImportReportsFromJson;
 use App\Models\Appointment;
@@ -125,6 +126,11 @@ Route::middleware('auth:sanctum')->group(function () {
     /* RELATÓRIOS MÉDICOS TERMINAM AQUI */
 
     Route::get('/doctors/{doctor}/payments', [PaymentController::class, 'index']);
+
+    Route::get('/doctors/{doctor}/work-times', [WorkTimeController::class, 'index']);
+    Route::post('/doctors/{doctor}/work-times', [WorkTimeController::class, 'store']);
+    Route::put('/doctors/{doctor}/work-times/{workTime}', [WorkTimeController::class, 'update']);
+    Route::delete('/doctors/{doctor}/work-times/{workTime}', [WorkTimeController::class, 'destroy']);
 
     // Redefinição de senha do usuário
     Route::put('/users/{id}/password', [UpdatePasswordController::class, 'update']);

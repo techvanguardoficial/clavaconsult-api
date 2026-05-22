@@ -71,4 +71,9 @@ class Doctor extends Model
     {
         return $this->belongsTo(UnitAddress::class, 'unit_addresses_id');
     }
+
+    public function workTimes(): HasMany
+    {
+        return $this->hasMany(WorkTime::class);
+    }
 }
