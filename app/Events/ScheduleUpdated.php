@@ -31,4 +31,11 @@ class ScheduleUpdated implements ShouldBroadcast
     {
         return new PrivateChannel('schedule.' . $this->doctor->id);
     }
+
+        public function broadcastWith(): array
+    {
+        return [
+            'doctor_id' => $this->doctor->id,
+        ];
+    }
 }
