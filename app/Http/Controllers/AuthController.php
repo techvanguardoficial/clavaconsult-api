@@ -34,6 +34,7 @@ class AuthController extends Controller
                 'email' => $user->email,
                 'admin' => $user->admin,
                 'profile_id' => $user->profile_id,
+                'unit_addresses_id' => $user->unit_addresses_id,
             ],
             'token' => $user->createToken('api-token')->plainTextToken,
         ]);

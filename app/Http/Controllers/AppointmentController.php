@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\ScheduleUpdated;
+use App\Http\Controllers\AppointmentLogController;
 use App\Http\Resources\AppointmentResource;
 use App\Http\Resources\EventResource;
 use App\Models\Appointment;
@@ -79,6 +80,7 @@ class AppointmentController extends Controller
             $appointment->payments()->saveMany($payments);
         }
 
+        AppointmentLogController::log($appointment->id, 'create');
         ScheduleUpdated::dispatch($doctor);
 
         return new AppointmentResource($appointment);
@@ -118,6 +120,7 @@ class AppointmentController extends Controller
             $appointment->payments()->saveMany($payments);
         }
 
+        AppointmentLogController::log($appointment->id, 'update');
         ScheduleUpdated::dispatch($appointment->event->doctor);
 
         return new AppointmentResource($appointment);
@@ -129,10 +132,14 @@ class AppointmentController extends Controller
      */
     public function destroy(Appointment $appointment): Response
     {
+        $appointmentId = $appointment->id;
+        $doctor = $appointment->event->doctor;
+
         $appointment->event->delete();
         $appointment->delete();
 
-        ScheduleUpdated::dispatch($appointment->event->doctor);
+        AppointmentLogController::log($appointmentId, 'delete');
+        ScheduleUpdated::dispatch($doctor);
 
         return response()->noContent();
     }

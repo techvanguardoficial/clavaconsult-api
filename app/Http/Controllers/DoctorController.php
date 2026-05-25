@@ -57,6 +57,7 @@ class DoctorController extends Controller
      */
     public function show(Doctor $doctor): DoctorResource
     {
+        
         return new DoctorResource($doctor);
     }
 

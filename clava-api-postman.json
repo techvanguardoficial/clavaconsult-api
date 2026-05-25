@@ -986,6 +986,161 @@
       ]
     },
     {
+      "name": "Doctor Plans (Planos do Médico)",
+      "item": [
+        {
+          "name": "List Doctor Plans",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{base_url}}/doctors/:doctor_id/plans",
+              "host": ["{{base_url}}"],
+              "path": ["doctors", ":doctor_id", "plans"]
+            }
+          }
+        },
+        {
+          "name": "Add Plan to Doctor",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"plan_id\": 1,\n  \"consultation_value\": 150.00\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/doctors/:doctor_id/plans",
+              "host": ["{{base_url}}"],
+              "path": ["doctors", ":doctor_id", "plans"]
+            }
+          }
+        },
+        {
+          "name": "Update Doctor Plan Value",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"consultation_value\": 200.00\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/doctors/:doctor_id/plans/:plan_id",
+              "host": ["{{base_url}}"],
+              "path": ["doctors", ":doctor_id", "plans", ":plan_id"]
+            }
+          }
+        },
+        {
+          "name": "Remove Plan from Doctor",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{base_url}}/doctors/:doctor_id/plans/:plan_id",
+              "host": ["{{base_url}}"],
+              "path": ["doctors", ":doctor_id", "plans", ":plan_id"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Work Times (Horários de Trabalho)",
+      "item": [
+        {
+          "name": "List Doctor Work Times",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{base_url}}/doctors/:doctor_id/work-times",
+              "host": ["{{base_url}}"],
+              "path": ["doctors", ":doctor_id", "work-times"]
+            }
+          }
+        },
+        {
+          "name": "Create Work Time",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"day_of_week\": 1,\n  \"period\": \"Manhã\",\n  \"start_time\": \"08:00\",\n  \"end_time\": \"12:00\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/doctors/:doctor_id/work-times",
+              "host": ["{{base_url}}"],
+              "path": ["doctors", ":doctor_id", "work-times"]
+            }
+          }
+        },
+        {
+          "name": "Update Work Time",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"start_time\": \"09:00\",\n  \"end_time\": \"13:00\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/doctors/:doctor_id/work-times/:work_time_id",
+              "host": ["{{base_url}}"],
+              "path": ["doctors", ":doctor_id", "work-times", ":work_time_id"]
+            }
+          }
+        },
+        {
+          "name": "Delete Work Time",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{base_url}}/doctors/:doctor_id/work-times/:work_time_id",
+              "host": ["{{base_url}}"],
+              "path": ["doctors", ":doctor_id", "work-times", ":work_time_id"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Appointment Logs",
+      "item": [
+        {
+          "name": "List Appointment Logs",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{base_url}}/appointment-logs",
+              "host": ["{{base_url}}"],
+              "path": ["appointment-logs"],
+              "query": [
+                { "key": "user_id", "value": "", "disabled": true },
+                { "key": "action_type", "value": "", "disabled": true }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
       "name": "Other Resources",
       "item": [
         {

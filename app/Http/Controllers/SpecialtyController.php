@@ -22,6 +22,10 @@ class SpecialtyController extends Controller
             $specialties->where('name', 'like', sprintf('%s%%', $request->query('search')));
         }
 
+        if ($request->boolean('with_doctors')) {
+            $specialties->whereHas('doctors');
+        }
+
         $specialties->orderBy('name');
 
         return SpecialtyResource::collection($specialties->get());
