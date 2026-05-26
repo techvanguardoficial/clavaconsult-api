@@ -5,3 +5,5 @@
 ./vendor/bin/sail artisan migrate --path=database/migrations/2022_09_24_213801_create_councils_table.php
 
  ./vendor/bin/sail artisan migrate --path=database/migrations/2026_05_21_000000_add_description_column_to_councils_table.php
+
+ ./vendor/bin/sail artisan migrate --path=database/migrations/2026_05_26_000001_create_unit_business_hours_table.php

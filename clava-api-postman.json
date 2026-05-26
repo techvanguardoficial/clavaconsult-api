@@ -1141,25 +1141,40 @@
       ]
     },
     {
-      "name": "Other Resources",
+      "name": "Unit Addresses (Unidades)",
       "item": [
         {
           "name": "List Unit Addresses",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "{{base_url}}/unit-adresses",
               "host": ["{{base_url}}"],
-              "path": ["unit-adresses"]
+              "path": ["unit-adresses"],
+              "query": [
+                { "key": "search", "value": "", "disabled": true }
+              ]
             }
           }
         },
+        {
+          "name": "Get Unit Address",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{base_url}}/unit-adresses/:id",
+              "host": ["{{base_url}}"],
+              "path": ["unit-adresses", ":id"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Other Resources",
+      "item": [
         {
           "name": "List Councils",
           "request": {

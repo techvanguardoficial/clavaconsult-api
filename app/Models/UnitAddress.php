@@ -28,4 +28,9 @@ class UnitAddress extends Model
     {
         return $this->hasMany(Doctor::class);
     }
+
+    public function businessHours(): HasMany
+    {
+        return $this->hasMany(UnitBusinessHour::class);
+    }
 }

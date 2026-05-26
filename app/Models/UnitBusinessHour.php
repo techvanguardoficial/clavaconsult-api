@@ -6,26 +6,25 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class WorkTime extends Model
+class UnitBusinessHour extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'doctor_id',
+        'unit_address_id',
         'day_of_week',
-        'period',
         'start_time',
         'end_time',
-        'room',
-        'observations',
+        'is_closed',
     ];
 
     protected $casts = [
         'day_of_week' => 'integer',
+        'is_closed'   => 'boolean',
     ];
 
-    public function doctor(): BelongsTo
+    public function unitAddress(): BelongsTo
     {
-        return $this->belongsTo(Doctor::class);
+        return $this->belongsTo(UnitAddress::class);
     }
 }

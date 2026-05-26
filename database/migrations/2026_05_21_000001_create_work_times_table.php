@@ -18,6 +18,8 @@ class CreateWorkTimesTable extends Migration
             $table->enum('period', ['Manhã', 'Tarde']);
             $table->time('start_time');
             $table->time('end_time');
+            $table->string('room')->nullable();
+            $table->string('observations')->nullable();
             $table->timestamps();
 
             $table->unique(['doctor_id', 'day_of_week', 'period']);

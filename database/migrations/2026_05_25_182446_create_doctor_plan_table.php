@@ -18,6 +18,7 @@ class CreateDoctorPlanTable extends Migration
             $table->foreignId('doctor_id')->constrained()->onDelete('cascade');
             $table->foreignId('plan_id')->constrained()->onDelete('cascade');
             $table->decimal('consultation_value', 10, 2)->nullable();
+            $table->string('observations')->nullable();
             $table->timestamps();
 
             $table->unique(['doctor_id', 'plan_id']);

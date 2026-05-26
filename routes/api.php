@@ -69,6 +69,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/specialties/{specialty}', [SpecialtyController::class, 'destroy'])->can('delete', Specialty::class);
 
     Route::get('/unit-adresses', [UnitAddressesController::class, 'index'])->can('viewAny', UnitAddress::class);
+    Route::get('/unit-adresses/{unitAddress}', [UnitAddressesController::class, 'show'])->can('view', UnitAddress::class);
 
     Route::get('/plans', [PlanController::class, 'index'])->can('viewAny', Plan::class);
     Route::get('/plans/{plan}', [PlanController::class, 'show'])->can('view', Plan::class);

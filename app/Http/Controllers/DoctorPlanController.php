@@ -20,10 +20,14 @@ class DoctorPlanController extends Controller
         $input = $request->validate([
             'plan_id'            => ['required', 'exists:plans,id'],
             'consultation_value' => ['nullable', 'numeric', 'min:0'],
+            'observations' => ['nullable', 'string'],
         ]);
 
         $doctor->plans()->syncWithoutDetaching([
-            $input['plan_id'] => ['consultation_value' => $input['consultation_value'] ?? null],
+            $input['plan_id'] => [
+                'consultation_value' => $input['consultation_value'] ?? null,
+                'observations' => $input['observations'] ?? null
+            ],
         ]);
 
         return response()->json($doctor->plans()->withPivot('consultation_value')->get());
@@ -33,10 +37,12 @@ class DoctorPlanController extends Controller
     {
         $input = $request->validate([
             'consultation_value' => ['nullable', 'numeric', 'min:0'],
+            'observations' => ['nullable', 'string'],
         ]);
 
         $doctor->plans()->updateExistingPivot($plan->id, [
             'consultation_value' => $input['consultation_value'],
+            'observations' => $input['observations'],
         ]);
 
         return response()->json($doctor->plans()->withPivot('consultation_value')->get());

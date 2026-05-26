@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\UnitAddress;
 use Illuminate\Http\Request;
 use App\Http\Resources\UnitAddresses as UnitAddressesResources;
+use App\Http\Resources\UnitAddressResource;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class UnitAddressesController extends Controller
@@ -54,9 +55,11 @@ class UnitAddressesController extends Controller
      * @param  \App\Models\UnitAdresses  $unitAdresses
      * @return \Illuminate\Http\Response
      */
-    public function show(UnitAddress $unitAdresses)
+    public function show(UnitAddress $unitAddress): UnitAddressResource
     {
-        //
+        $unitAddress->load('businessHours');
+
+        return new UnitAddressResource($unitAddress);
     }
 
     /**
