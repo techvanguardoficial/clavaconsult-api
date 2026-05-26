@@ -17,3 +17,5 @@
 ./vendor/bin/sail artisan migrate --path=database/migrations/2026_05_26_000006_create_companies_table.php
 
 ./vendor/bin/sail artisan migrate --path=database/migrations/2026_05_26_000007_add_company_id_to_unit_addresses_table.php
+
+./vendor/bin/sail artisan migrate --path=database/migrations/2026_05_26_000008_add_unique_room_schedule_to_work_times_table.php

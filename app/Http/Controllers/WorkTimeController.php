@@ -8,6 +8,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
 
 class WorkTimeController extends Controller
 {
@@ -26,6 +27,8 @@ class WorkTimeController extends Controller
             'unit_room_id' => ['nullable', 'exists:unit_rooms,id'],
             'observations' => ['nullable', 'string'],
         ]);
+
+        $this->validateRoomConflict($input['unit_room_id'] ?? null, $input['day_of_week'], $input['period']);
 
         try {
             $workTime = $doctor->workTimes()->create($input);
@@ -53,6 +56,12 @@ class WorkTimeController extends Controller
             'observations' => ['sometimes', 'string'],
         ]);
 
+        $roomId     = $input['unit_room_id'] ?? $workTime->unit_room_id;
+        $dayOfWeek  = $input['day_of_week'] ?? $workTime->day_of_week;
+        $period     = $input['period'] ?? $workTime->period;
+
+        $this->validateRoomConflict($roomId, $dayOfWeek, $period, $workTime->id);
+
         $workTime->update($input);
 
         return response()->json($workTime);
@@ -63,5 +72,24 @@ class WorkTimeController extends Controller
         $workTime->delete();
 
         return response()->noContent();
+    }
+
+    private function validateRoomConflict(?int $unitRoomId, int $dayOfWeek, string $period, ?int $ignoreId = null): void
+    {
+        if (!$unitRoomId) {
+            return;
+        }
+
+        $exists = WorkTime::where('unit_room_id', $unitRoomId)
+            ->where('day_of_week', $dayOfWeek)
+            ->where('period', $period)
+            ->when($ignoreId, fn($q) => $q->where('id', '!=', $ignoreId))
+            ->exists();
+
+        if ($exists) {
+            throw ValidationException::withMessages([
+                'unit_room_id' => 'Esta sala já está ocupada neste dia e período por outro médico.',
+            ]);
+        }
     }
 }
