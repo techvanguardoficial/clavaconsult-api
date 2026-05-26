@@ -24,6 +24,10 @@ class DoctorController extends Controller
     {
         $dbQuery = Doctor::query();
 
+        if ($specialtyId = $request->query('specialty_id')) {
+            $dbQuery->where('specialty_id', $specialtyId);
+        }
+
         if ($search = $request->query('search')) {
             $like = '%' . $search . '%';
             $digits = preg_replace('/\D+/', '', $search);
@@ -34,7 +38,8 @@ class DoctorController extends Controller
                         ->orWhere('email', 'like', $like);
                 });
 
-                $query->orWhere('council_number', 'like', $like);
+                $query->orWhere('council_number', 'like', $like)
+                    ->orWhereHas('specialty', fn(Builder $q) => $q->where('name', 'like', $like));
 
                 if ($digits !== '') {
                     $digitsLike = '%' . $digits . '%';

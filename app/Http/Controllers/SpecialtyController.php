@@ -26,6 +26,10 @@ class SpecialtyController extends Controller
             $specialties->whereHas('doctors');
         }
 
+        if ($unitAddressId = $request->query('unit_addresses_id')) {
+            $specialties->whereHas('doctors', fn($q) => $q->where('unit_addresses_id', $unitAddressId));
+        }
+
         $specialties->orderBy('name');
 
         return SpecialtyResource::collection($specialties->get());
