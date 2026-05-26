@@ -23,20 +23,11 @@ class UnitAddressesController extends Controller
             $unitAdresses->where('unit_name', 'like', sprintf('%s%%', $request->query('search')));
         }
 
-        $unitAdresses->orderBy('unit_name');
+        $unitAdresses->with('company')->orderBy('unit_name');
 
-        return UnitAddressesResources::collection($unitAdresses->cursorPaginate(25)->withQueryString());
+        return UnitAddressResource::collection($unitAdresses->cursorPaginate(25)->withQueryString());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -44,9 +35,23 @@ class UnitAddressesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request): UnitAddressResource
     {
-        //
+        $input = $request->validate([
+            'company_id'    => ['nullable', 'exists:companies,id'],
+            'unit_name'     => ['required', 'string', 'max:255'],
+            'street'        => ['nullable', 'string', 'max:255'],
+            'number'        => ['nullable', 'string', 'max:20'],
+            'complementary' => ['nullable', 'string', 'max:255'],
+            'neighborhood'  => ['nullable', 'string', 'max:255'],
+            'city'          => ['nullable', 'string', 'max:255'],
+            'state'         => ['nullable', 'string', 'max:2'],
+            'zip_code'      => ['nullable', 'string', 'max:9'],
+        ]);
+
+        $unitAddress = UnitAddress::create($input);
+
+        return new UnitAddressResource($unitAddress);
     }
 
     /**
@@ -57,21 +62,11 @@ class UnitAddressesController extends Controller
      */
     public function show(UnitAddress $unitAddress): UnitAddressResource
     {
-        $unitAddress->load('businessHours');
+        $unitAddress->load('company', 'businessHours');
 
         return new UnitAddressResource($unitAddress);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\UnitAdresses  $unitAdresses
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(UnitAddress $unitAdresses)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -80,9 +75,23 @@ class UnitAddressesController extends Controller
      * @param  \App\Models\UnitAdresses  $unitAdresses
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, UnitAddress $unitAdresses)
+    public function update(Request $request, UnitAddress $unitAddress): UnitAddressResource
     {
-        //
+        $input = $request->validate([
+            'company_id'    => ['sometimes', 'nullable', 'exists:companies,id'],
+            'unit_name'     => ['sometimes', 'string', 'max:255'],
+            'street'        => ['sometimes', 'nullable', 'string', 'max:255'],
+            'number'        => ['sometimes', 'nullable', 'string', 'max:20'],
+            'complementary' => ['sometimes', 'nullable', 'string', 'max:255'],
+            'neighborhood'  => ['sometimes', 'nullable', 'string', 'max:255'],
+            'city'          => ['sometimes', 'nullable', 'string', 'max:255'],
+            'state'         => ['sometimes', 'nullable', 'string', 'max:2'],
+            'zip_code'      => ['sometimes', 'nullable', 'string', 'max:9'],
+        ]);
+
+        $unitAddress->update($input);
+
+        return new UnitAddressResource($unitAddress);
     }
 
     /**
@@ -91,8 +100,10 @@ class UnitAddressesController extends Controller
      * @param  \App\Models\UnitAdresses  $unitAdresses
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UnitAddress $unitAdresses)
+    public function destroy(UnitAddress $unitAddress): \Illuminate\Http\Response
     {
-        //
+        $unitAddress->delete();
+
+        return response()->noContent();
     }
 }

@@ -17,7 +17,9 @@ use App\Http\Controllers\PlanController;
 use App\Http\Controllers\ReportConfigController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SpecialtyController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\UnitAddressesController;
+use App\Http\Controllers\UnitRoomController;
 use App\Http\Controllers\UpdatePasswordController;
 use App\Http\Controllers\DoctorPlanController;
 use App\Http\Controllers\WorkTimeController;
@@ -68,8 +70,23 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/specialties/{specialty}', [SpecialtyController::class, 'update'])->can('update', Specialty::class);
     Route::delete('/specialties/{specialty}', [SpecialtyController::class, 'destroy'])->can('delete', Specialty::class);
 
+    Route::get('/companies', [CompanyController::class, 'index']);
+    Route::post('/companies', [CompanyController::class, 'store']);
+    Route::get('/companies/{company}', [CompanyController::class, 'show']);
+    Route::put('/companies/{company}', [CompanyController::class, 'update']);
+    Route::delete('/companies/{company}', [CompanyController::class, 'destroy']);
+
     Route::get('/unit-adresses', [UnitAddressesController::class, 'index'])->can('viewAny', UnitAddress::class);
+    Route::post('/unit-adresses', [UnitAddressesController::class, 'store'])->can('create', UnitAddress::class);
     Route::get('/unit-adresses/{unitAddress}', [UnitAddressesController::class, 'show'])->can('view', UnitAddress::class);
+    Route::put('/unit-adresses/{unitAddress}', [UnitAddressesController::class, 'update'])->can('update', UnitAddress::class);
+    Route::delete('/unit-adresses/{unitAddress}', [UnitAddressesController::class, 'destroy'])->can('delete', UnitAddress::class);
+
+    Route::get('/unit-adresses/{unitAddress}/rooms', [UnitRoomController::class, 'index']);
+    Route::post('/unit-adresses/{unitAddress}/rooms', [UnitRoomController::class, 'store']);
+    Route::get('/unit-adresses/{unitAddress}/rooms/{unitRoom}', [UnitRoomController::class, 'show']);
+    Route::put('/unit-adresses/{unitAddress}/rooms/{unitRoom}', [UnitRoomController::class, 'update']);
+    Route::delete('/unit-adresses/{unitAddress}/rooms/{unitRoom}', [UnitRoomController::class, 'destroy']);
 
     Route::get('/plans', [PlanController::class, 'index'])->can('viewAny', Plan::class);
     Route::get('/plans/{plan}', [PlanController::class, 'show'])->can('view', Plan::class);

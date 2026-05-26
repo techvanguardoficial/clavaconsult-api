@@ -80,6 +80,7 @@ class DoctorController extends Controller
             'admin' => ['required', 'boolean'],
             'unit_addresses_id' => ['required', 'integer', 'numeric'],
             'cpf' => ['required', 'string', 'max:255', 'unique:doctors'],
+            'phone' => ['string', 'max:255'],
             'council_type' => ['required', 'string', 'max:255'],
             'council_number' => ['required', 'string', 'max:255', 'unique:doctors'],
             'specialty_id' => ['required', 'exists:specialties,id']
@@ -112,14 +113,15 @@ class DoctorController extends Controller
     public function update(Doctor $doctor, Request $request): DoctorResource
     {
         $input = $request->validate([
-            'name' => ['required', 'string', 'min:3', 'max:255'],
-            'email' => ['required', 'string', 'max:255', 'email', Rule::unique('users')->ignore($doctor->user->id)],
-            'admin' => ['required', 'boolean'],
-            'cpf' => ['required', 'string', 'max:255', Rule::unique('doctors')->ignore($doctor->id)],
-            'council_type' => ['required', 'string', 'max:255'],
-            'council_number' => ['required', 'string', 'max:255', Rule::unique('doctors')->ignore($doctor->id)],
-            'specialty_id' => ['required', 'exists:specialties,id'],
-            'unit_addresses_id' => ['required', 'integer', 'numeric']
+            'name' => ['sometimes', 'string', 'min:3', 'max:255'],
+            'email' => ['sometimes', 'string', 'max:255', 'email', Rule::unique('users')->ignore($doctor->user->id)],
+            'admin' => ['sometimes', 'boolean'],
+            'cpf' => ['sometimes', 'string', 'max:255', Rule::unique('doctors')->ignore($doctor->id)],
+            'phone' => ['sometimes', 'string', 'max:255'],
+            'council_type' => ['sometimes', 'string', 'max:255'],
+            'council_number' => ['sometimes', 'string', 'max:255', Rule::unique('doctors')->ignore($doctor->id)],
+            'specialty_id' => ['sometimes', 'exists:specialties,id'],
+            'unit_addresses_id' => ['sometimes', 'integer', 'numeric']
         ]);
 
         $doctor->update($input);

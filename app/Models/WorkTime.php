@@ -12,11 +12,11 @@ class WorkTime extends Model
 
     protected $fillable = [
         'doctor_id',
+        'unit_room_id',
         'day_of_week',
         'period',
         'start_time',
         'end_time',
-        'room',
         'observations',
     ];
 
@@ -27,5 +27,10 @@ class WorkTime extends Model
     public function doctor(): BelongsTo
     {
         return $this->belongsTo(Doctor::class);
+    }
+
+    public function unitRoom(): BelongsTo
+    {
+        return $this->belongsTo(UnitRoom::class);
     }
 }

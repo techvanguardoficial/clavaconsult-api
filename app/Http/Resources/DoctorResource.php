@@ -27,6 +27,7 @@ class DoctorResource extends JsonResource
             'admin' => $this->user->admin,
             'specialty' => $this->specialty,
             'cpf' => $this->cpf,
+            'phone' => $this->phone,
             'council_type' => $this->council_type,
             'council_number' => $this->council_number,
             'unit_addresses_id' => $this->unit_addresses_id,

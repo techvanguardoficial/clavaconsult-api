@@ -23,11 +23,11 @@ class WorkTimeSeeder extends Seeder
             foreach ($periods as $period) {
                 WorkTime::create([
                     'doctor_id'  => $doctorId,
+                    'unit_room_id' => 2, // Adicione o campo unit_room_id com um valor válido
                     'day_of_week' => $day,
                     'period'     => $period['period'],
                     'start_time' => $period['start_time'],
                     'end_time'   => $period['end_time'],
-                    'room'       => null,
                     'observations' => null,
                 ]);
             }

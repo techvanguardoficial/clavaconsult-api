@@ -13,17 +13,17 @@ class WorkTimeController extends Controller
 {
     public function index(Doctor $doctor): JsonResponse
     {
-        return response()->json($doctor->workTimes()->orderBy('day_of_week')->orderBy('period')->get());
+        return response()->json($doctor->workTimes()->with('unitRoom')->orderBy('day_of_week')->orderBy('period')->get());
     }
 
     public function store(Request $request, Doctor $doctor): JsonResponse
     {
         $input = $request->validate([
-            'day_of_week' => ['required', 'integer', 'min:0', 'max:6'],
-            'period'      => ['required', 'in:Manhã,Tarde'],
-            'start_time'  => ['required', 'date_format:H:i'],
-            'end_time'    => ['required', 'date_format:H:i', 'after:start_time'],
-            'room' => ['nullable', 'string', 'max:255'],
+            'day_of_week'  => ['required', 'integer', 'min:0', 'max:6'],
+            'period'       => ['required', 'in:Manhã,Tarde'],
+            'start_time'   => ['required', 'date_format:H:i'],
+            'end_time'     => ['required', 'date_format:H:i', 'after:start_time'],
+            'unit_room_id' => ['nullable', 'exists:unit_rooms,id'],
             'observations' => ['nullable', 'string'],
         ]);
 
@@ -45,11 +45,11 @@ class WorkTimeController extends Controller
     public function update(Request $request, Doctor $doctor, WorkTime $workTime): JsonResponse
     {
         $input = $request->validate([
-            'day_of_week' => ['sometimes', 'integer', 'min:0', 'max:6'],
-            'period'      => ['sometimes', 'in:Manhã,Tarde'],
-            'start_time'  => ['sometimes', 'date_format:H:i'],
-            'end_time'    => ['sometimes', 'date_format:H:i', 'after:start_time'],
-            'room' => ['sometimes', 'string', 'max:255'],
+            'day_of_week'  => ['sometimes', 'integer', 'min:0', 'max:6'],
+            'period'       => ['sometimes', 'in:Manhã,Tarde'],
+            'start_time'   => ['sometimes', 'date_format:H:i'],
+            'end_time'     => ['sometimes', 'date_format:H:i', 'after:start_time'],
+            'unit_room_id' => ['sometimes', 'nullable', 'exists:unit_rooms,id'],
             'observations' => ['sometimes', 'string'],
         ]);
 

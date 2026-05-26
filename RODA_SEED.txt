@@ -7,3 +7,13 @@
  ./vendor/bin/sail artisan migrate --path=database/migrations/2026_05_21_000000_add_description_column_to_councils_table.php
 
  ./vendor/bin/sail artisan migrate --path=database/migrations/2026_05_26_000001_create_unit_business_hours_table.php
+
+./vendor/bin/sail artisan migrate --path=database/migrations/2026_05_26_000002_add_phone_to_doctors_table.php
+
+./vendor/bin/sail artisan migrate --path=database/migrations/2026_05_26_000003_create_unit_rooms_table.php
+
+./vendor/bin/sail artisan migrate --path=database/migrations/2026_05_26_000005_add_unit_room_id_to_work_times_table.php
+
+./vendor/bin/sail artisan migrate --path=database/migrations/2026_05_26_000006_create_companies_table.php
+
+./vendor/bin/sail artisan migrate --path=database/migrations/2026_05_26_000007_add_company_id_to_unit_addresses_table.php

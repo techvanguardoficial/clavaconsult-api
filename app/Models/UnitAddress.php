@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -14,6 +15,7 @@ class UnitAddress extends Model
     use HasFactory;
 
     protected $fillable = [
+        'company_id',
         'unit_name',
         'street',
         'number',
@@ -21,8 +23,13 @@ class UnitAddress extends Model
         'neighborhood',
         'city',
         'state',
-        'zip_code'
+        'zip_code',
     ];
+
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class);
+    }
 
     public function doctors(): HasMany
     {
@@ -32,5 +39,10 @@ class UnitAddress extends Model
     public function businessHours(): HasMany
     {
         return $this->hasMany(UnitBusinessHour::class);
+    }
+
+    public function rooms(): HasMany
+    {
+        return $this->hasMany(UnitRoom::class);
     }
 }

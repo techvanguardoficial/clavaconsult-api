@@ -15,10 +15,11 @@ class UnitAddresses extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'unit_name' => $this->unit_name,
+            'id'         => $this->id,
+            'company_id' => $this->company_id,
+            'unit_name'  => $this->unit_name,
             'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at
+            'updated_at' => $this->updated_at,
         ];
     }
 }
