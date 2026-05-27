@@ -6,27 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 class AddUnitAddressesIdColumnToDoctorsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::table('doctors', function (Blueprint $table) {
-            $table->foreignId('unit_addresses_id')->after('old_id')->nullable();
+            $table->foreignId('unit_addresses_id')->nullable()->after('old_id')->constrained('unit_addresses')->onDelete('set null');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::table('doctors', function (Blueprint $table) {
-            //
+            $table->dropForeign(['unit_addresses_id']);
+            $table->dropColumn('unit_addresses_id');
         });
     }
 }
