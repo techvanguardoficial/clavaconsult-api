@@ -19,6 +19,7 @@ use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SpecialtyController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\UnitAddressesController;
+use App\Http\Controllers\UnitBusinessHoursController;
 use App\Http\Controllers\UnitRoomController;
 use App\Http\Controllers\UpdatePasswordController;
 use App\Http\Controllers\DoctorPlanController;
@@ -81,6 +82,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/unit-adresses/{unitAddress}', [UnitAddressesController::class, 'show'])->can('view', UnitAddress::class);
     Route::put('/unit-adresses/{unitAddress}', [UnitAddressesController::class, 'update'])->can('update', UnitAddress::class);
     Route::delete('/unit-adresses/{unitAddress}', [UnitAddressesController::class, 'destroy'])->can('delete', UnitAddress::class);
+
+    Route::get('/unit-adresses/{unitAddress}/business-hours', [UnitBusinessHoursController::class, 'index']);
+    Route::post('/unit-adresses/{unitAddress}/business-hours', [UnitBusinessHoursController::class, 'store']);
+    Route::put('/unit-adresses/{unitAddress}/business-hours/{businessHour}', [UnitBusinessHoursController::class, 'update']);
+    Route::delete('/unit-adresses/{unitAddress}/business-hours/{businessHour}', [UnitBusinessHoursController::class, 'destroy']);
 
     Route::get('/unit-adresses/{unitAddress}/rooms', [UnitRoomController::class, 'index']);
     Route::post('/unit-adresses/{unitAddress}/rooms', [UnitRoomController::class, 'store']);
