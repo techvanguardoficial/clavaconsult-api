@@ -41,6 +41,8 @@ return [
 
     'debug' => (bool) env('APP_DEBUG', false),
 
+    'bot_api_key' => env('BOT_API_KEY'),
+
     /*
     |--------------------------------------------------------------------------
     | Application URL
