@@ -117,7 +117,9 @@ class BotController extends Controller
             'phone' => ['required', 'string'],
         ]);
 
-        $digits = preg_replace('/\D+/', '', $request->query('phone'));
+        $raw    = preg_replace('/\D+/', '', $request->query('phone', ''));
+        // WhatsApp envia com DDI 55 (ex: 5511999990000); remove para bater com o banco
+        $digits = preg_match('/^55\d{10,11}$/', $raw) ? substr($raw, 2) : $raw;
 
         $patient = Patient::whereRaw(
             "REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(phone, '(', ''), ')', ''), '-', ''), ' ', ''), '+', '') LIKE ?",

@@ -291,6 +291,73 @@
       ]
     },
     {
+      "name": "Unit Business Hours (Horários de Funcionamento)",
+      "item": [
+        {
+          "name": "List Business Hours",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{base_url}}/unit-adresses/:unit_address_id/business-hours",
+              "host": ["{{base_url}}"],
+              "path": ["unit-adresses", ":unit_address_id", "business-hours"]
+            }
+          }
+        },
+        {
+          "name": "Create Business Hour",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"day_of_week\": 1,\n  \"start_time\": \"08:00:00\",\n  \"end_time\": \"18:00:00\",\n  \"is_closed\": false\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/unit-adresses/:unit_address_id/business-hours",
+              "host": ["{{base_url}}"],
+              "path": ["unit-adresses", ":unit_address_id", "business-hours"]
+            }
+          }
+        },
+        {
+          "name": "Update Business Hour",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"start_time\": \"09:00:00\",\n  \"end_time\": \"17:00:00\",\n  \"is_closed\": false\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/unit-adresses/:unit_address_id/business-hours/:business_hour_id",
+              "host": ["{{base_url}}"],
+              "path": ["unit-adresses", ":unit_address_id", "business-hours", ":business_hour_id"]
+            }
+          }
+        },
+        {
+          "name": "Delete Business Hour",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{base_url}}/unit-adresses/:unit_address_id/business-hours/:business_hour_id",
+              "host": ["{{base_url}}"],
+              "path": ["unit-adresses", ":unit_address_id", "business-hours", ":business_hour_id"]
+            }
+          }
+        }
+      ]
+    },
+    {
       "name": "Specialties (Especialidades)",
       "item": [
         {
@@ -1247,6 +1314,181 @@
           }
         }
       ]
+    },
+    {
+      "name": "Bot (WhatsApp / N8N)",
+      "item": [
+        {
+          "name": "List Specialties",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Bot-Key", "value": "{{bot_key}}" }],
+            "url": {
+              "raw": "{{base_url}}/bot/specialties",
+              "host": ["{{base_url}}"],
+              "path": ["bot", "specialties"]
+            }
+          }
+        },
+        {
+          "name": "List Doctors by Specialty",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Bot-Key", "value": "{{bot_key}}" }],
+            "url": {
+              "raw": "{{base_url}}/bot/doctors?specialty_id=",
+              "host": ["{{base_url}}"],
+              "path": ["bot", "doctors"],
+              "query": [
+                { "key": "specialty_id", "value": "", "description": "ID da especialidade" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Available Slots",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Bot-Key", "value": "{{bot_key}}" }],
+            "url": {
+              "raw": "{{base_url}}/bot/doctors/:doctor_id/available-slots?date=&duration=30",
+              "host": ["{{base_url}}"],
+              "path": ["bot", "doctors", ":doctor_id", "available-slots"],
+              "query": [
+                { "key": "date", "value": "", "description": "Data no formato Y-m-d" },
+                { "key": "duration", "value": "30", "description": "Duração em minutos" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Find Patient by Phone",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Bot-Key", "value": "{{bot_key}}" }],
+            "url": {
+              "raw": "{{base_url}}/bot/patients/find?phone=",
+              "host": ["{{base_url}}"],
+              "path": ["bot", "patients", "find"],
+              "query": [
+                { "key": "phone", "value": "", "description": "Número de telefone do paciente" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Patient",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "X-Bot-Key", "value": "{{bot_key}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Carlos Oliveira\",\n  \"phone\": \"(11) 90000-0000\",\n  \"email\": null,\n  \"document\": null,\n  \"birthday\": null\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/bot/patients",
+              "host": ["{{base_url}}"],
+              "path": ["bot", "patients"]
+            }
+          }
+        },
+        {
+          "name": "List Patient Appointments",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Bot-Key", "value": "{{bot_key}}" }],
+            "url": {
+              "raw": "{{base_url}}/bot/patients/:patient_id/appointments",
+              "host": ["{{base_url}}"],
+              "path": ["bot", "patients", ":patient_id", "appointments"]
+            }
+          }
+        },
+        {
+          "name": "Create Appointment",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "X-Bot-Key", "value": "{{bot_key}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"patient_id\": 1,\n  \"date\": \"2026-06-15\",\n  \"time\": \"10:00\",\n  \"duration\": \"00:30\",\n  \"plan_id\": null,\n  \"comment\": null\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/bot/doctors/:doctor_id/appointments",
+              "host": ["{{base_url}}"],
+              "path": ["bot", "doctors", ":doctor_id", "appointments"]
+            }
+          }
+        },
+        {
+          "name": "Update Appointment Status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "X-Bot-Key", "value": "{{bot_key}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"confirmed\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/bot/appointments/:appointment_id/status",
+              "host": ["{{base_url}}"],
+              "path": ["bot", "appointments", ":appointment_id", "status"]
+            }
+          }
+        },
+        {
+          "name": "Get Session",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Bot-Key", "value": "{{bot_key}}" }],
+            "url": {
+              "raw": "{{base_url}}/bot/sessions/:phone",
+              "host": ["{{base_url}}"],
+              "path": ["bot", "sessions", ":phone"]
+            }
+          }
+        },
+        {
+          "name": "Update Session",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "X-Bot-Key", "value": "{{bot_key}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"step\": \"collect_date\",\n  \"mode\": \"scheduling\",\n  \"data\": {\n    \"specialty_id\": 1,\n    \"doctor_id\": 2\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/bot/sessions/:phone",
+              "host": ["{{base_url}}"],
+              "path": ["bot", "sessions", ":phone"]
+            }
+          }
+        },
+        {
+          "name": "Reset Session",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "X-Bot-Key", "value": "{{bot_key}}" }],
+            "url": {
+              "raw": "{{base_url}}/bot/sessions/:phone",
+              "host": ["{{base_url}}"],
+              "path": ["bot", "sessions", ":phone"]
+            }
+          }
+        }
+      ]
     }
   ],
   "variable": [
@@ -1257,6 +1499,11 @@
     },
     {
       "key": "token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "bot_key",
       "value": "",
       "type": "string"
     }
