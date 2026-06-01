@@ -21,9 +21,17 @@ class BotController extends Controller
     // Especialidades
     // -------------------------------------------------------------------------
 
-    public function specialties(): JsonResponse
+    public function specialties(Request $request): JsonResponse
     {
-        $specialties = Specialty::orderBy('name')->get(['id', 'name']);
+        $request->validate([
+            'unit_address_id' => ['nullable', 'exists:unit_addresses,id'],
+        ]);
+
+        $specialties = Specialty::whereHas('doctors', function ($q) use ($request) {
+            if ($request->filled('unit_address_id')) {
+                $q->where('unit_addresses_id', $request->query('unit_address_id'));
+            }
+        })->orderBy('name')->get(['id', 'name']);
 
         return response()->json($specialties);
     }

@@ -1324,9 +1324,12 @@
             "method": "GET",
             "header": [{ "key": "X-Bot-Key", "value": "{{bot_key}}" }],
             "url": {
-              "raw": "{{base_url}}/bot/specialties",
+              "raw": "{{base_url}}/bot/specialties?unit_address_id=",
               "host": ["{{base_url}}"],
-              "path": ["bot", "specialties"]
+              "path": ["bot", "specialties"],
+              "query": [
+                { "key": "unit_address_id", "value": "", "description": "Filtro por unidade (opcional)" }
+              ]
             }
           }
         },
