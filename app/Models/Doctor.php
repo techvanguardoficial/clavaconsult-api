@@ -90,4 +90,9 @@ class Doctor extends Model
     {
         return $this->hasMany(DoctorInformation::class);
     }
+
+    public function csatResponses(): HasMany
+    {
+        return $this->hasMany(CsatDoctorResponse::class);
+    }
 }

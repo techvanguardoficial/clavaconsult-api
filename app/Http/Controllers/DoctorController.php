@@ -62,7 +62,7 @@ class DoctorController extends Controller
      */
     public function show(Doctor $doctor): DoctorResource
     {
-        $doctor->loadMissing('information');
+        $doctor->loadMissing(['information', 'csatResponses']);
 
         return new DoctorResource($doctor);
     }

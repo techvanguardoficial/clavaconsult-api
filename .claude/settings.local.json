@@ -11,7 +11,11 @@
       "Bash(grep -n -i \"information\" \"\\\\\\\\wsl.localhost\\\\ubuntu-24.04\\\\home\\\\masterdba6\\\\projetos\\\\clava-api\\\\routes\\\\api.php\")",
       "Bash(cat \"\\\\\\\\wsl.localhost\\\\ubuntu-24.04\\\\home\\\\masterdba6\\\\projetos\\\\clava-api\\\\app\\\\Models\\\\DoctorInformation.php\")",
       "Bash(find \"\\\\\\\\wsl.localhost\\\\ubuntu-24.04\\\\home\\\\masterdba6\\\\projetos\\\\clava-api\\\\app\\\\Models\" -name \"*Information*\")",
-      "Bash(tail -50 \"\\\\\\\\wsl.localhost\\\\ubuntu-24.04\\\\home\\\\masterdba6\\\\projetos\\\\clava-api\\\\storage\\\\logs\\\\laravel.log\")"
+      "Bash(tail -50 \"\\\\\\\\wsl.localhost\\\\ubuntu-24.04\\\\home\\\\masterdba6\\\\projetos\\\\clava-api\\\\storage\\\\logs\\\\laravel.log\")",
+      "Bash(grep -n \"HasMany\\\\|hasMany\\\\|information\" /mnt/c/wsl.localhost/ubuntu-24.04/home/masterdba6/projetos/clava-api/app/Models/Doctor.php | tail -10)",
+      "Bash(grep -n \"HasMany\\\\|hasMany\\\\|class Employee\" /mnt/c/wsl.localhost/ubuntu-24.04/home/masterdba6/projetos/clava-api/app/Models/Employee.php | head -10)",
+      "Bash(cd \"\\\\\\\\wsl.localhost\\\\ubuntu-24.04\\\\home\\\\masterdba6\\\\projetos\\\\clava-api\")",
+      "Bash(docker compose *)"
     ]
   }
 }

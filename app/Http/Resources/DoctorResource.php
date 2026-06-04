@@ -38,6 +38,16 @@ class DoctorResource extends JsonResource
                 $this->relationLoaded('information'),
                 fn() => DoctorInformationResource::collection($this->information)
             ),
+            'csat_average' => $this->when(
+                $this->relationLoaded('csatResponses'),
+                fn() => $this->csatResponses->count() > 0
+                    ? round($this->csatResponses->avg('score'), 1)
+                    : null
+            ),
+            'csat_count' => $this->when(
+                $this->relationLoaded('csatResponses'),
+                fn() => $this->csatResponses->count()
+            ),
         ];
     }
 }

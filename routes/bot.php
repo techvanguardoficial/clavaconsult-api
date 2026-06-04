@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Bot\BotController;
 use App\Http\Controllers\Bot\BotSessionController;
+use App\Http\Controllers\Bot\CsatController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,4 +52,7 @@ Route::middleware('bot.key')->prefix('bot')->group(function () {
 
     // Reseta sessão para idle (fim de fluxo ou escalada encerrada)
     Route::delete('/sessions/{phone}', [BotSessionController::class, 'reset']);
+
+    // CSAT — avaliações de atendimento
+    Route::post('/csat', [CsatController::class, 'store']);
 });
