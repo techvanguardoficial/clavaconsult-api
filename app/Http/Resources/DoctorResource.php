@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use App\Models\Doctor;
 use Illuminate\Http\Request;
+use App\Http\Resources\DoctorInformationResource;
 use App\Http\Resources\DoctorPlanResource;
 use App\Http\Resources\WorkTimeResource;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -33,6 +34,10 @@ class DoctorResource extends JsonResource
             'unit_addresses_id' => $this->unit_addresses_id,
             'work_times' => WorkTimeResource::collection($this->workTimes),
             'plans' => DoctorPlanResource::collection($this->plans),
+            'information' => $this->when(
+                $this->relationLoaded('information'),
+                fn() => DoctorInformationResource::collection($this->information)
+            ),
         ];
     }
 }

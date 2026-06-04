@@ -19,6 +19,7 @@ class DoctorInformationController extends Controller
         $data = $request->validate([
             'key'         => 'nullable|string|max:255',
             'information' => 'required|string',
+            'active'      => 'boolean',
         ]);
 
         $info = $doctor->information()->create($data);
@@ -31,6 +32,7 @@ class DoctorInformationController extends Controller
         $data = $request->validate([
             'key'         => 'nullable|string|max:255',
             'information' => 'required|string',
+            'active'      => 'boolean',
         ]);
 
         $information->update($data);

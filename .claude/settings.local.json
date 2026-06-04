@@ -5,7 +5,13 @@
       "Read(///wsl.localhost/Ubuntu-24.04/home/masterdba6/projetos/clava-api/database/**)",
       "Bash(php -r \"echo 'App\\\\\\\\Models\\\\\\\\Doctor';\")",
       "Bash(ls \"\\\\\\\\wsl.localhost\\\\ubuntu-24.04\\\\home\\\\masterdba6\\\\projetos\\\\clava-api\")",
-      "Bash(find \"/mnt/c/Users/Robson/Desktop/frontend-web/clavaconsult/src/routes\" -name \"*.tsx\" | sort)"
+      "Bash(find \"/mnt/c/Users/Robson/Desktop/frontend-web/clavaconsult/src/routes\" -name \"*.tsx\" | sort)",
+      "Bash(ls \"\\\\\\\\wsl.localhost\\\\ubuntu-24.04\\\\home\\\\masterdba6\\\\projetos\\\\clava-api\\\\app\\\\Http\\\\Resources\\\\\")",
+      "Read(//mnt/c/wsl.localhost/ubuntu-24.04/home/masterdba6/projetos/clava-api/routes/**)",
+      "Bash(grep -n -i \"information\" \"\\\\\\\\wsl.localhost\\\\ubuntu-24.04\\\\home\\\\masterdba6\\\\projetos\\\\clava-api\\\\routes\\\\api.php\")",
+      "Bash(cat \"\\\\\\\\wsl.localhost\\\\ubuntu-24.04\\\\home\\\\masterdba6\\\\projetos\\\\clava-api\\\\app\\\\Models\\\\DoctorInformation.php\")",
+      "Bash(find \"\\\\\\\\wsl.localhost\\\\ubuntu-24.04\\\\home\\\\masterdba6\\\\projetos\\\\clava-api\\\\app\\\\Models\" -name \"*Information*\")",
+      "Bash(tail -50 \"\\\\\\\\wsl.localhost\\\\ubuntu-24.04\\\\home\\\\masterdba6\\\\projetos\\\\clava-api\\\\storage\\\\logs\\\\laravel.log\")"
     ]
   }
 }

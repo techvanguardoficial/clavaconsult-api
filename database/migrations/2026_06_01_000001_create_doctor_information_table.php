@@ -13,6 +13,7 @@ return new class extends Migration
             $table->foreignId('doctor_id')->constrained()->cascadeOnDelete();
             $table->string('key')->nullable();
             $table->text('information');
+            $table->boolean('active')->default(false);
             $table->timestamps();
         });
     }

@@ -14,6 +14,7 @@ class DoctorInformation extends Model
         'doctor_id',
         'key',
         'information',
+        'active',
     ];
 
     public function doctor(): BelongsTo
