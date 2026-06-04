@@ -3,7 +3,9 @@
     "allow": [
       "Bash(ls \\\\\\\\\\\\\\\\wsl.localhost\\\\\\\\Ubuntu-24.04\\\\\\\\home\\\\\\\\masterdba6\\\\\\\\projetos\\\\\\\\clava-api\\\\\\\\database\\\\\\\\migrations | grep -i patient)",
       "Read(///wsl.localhost/Ubuntu-24.04/home/masterdba6/projetos/clava-api/database/**)",
-      "Bash(php -r \"echo 'App\\\\\\\\Models\\\\\\\\Doctor';\")"
+      "Bash(php -r \"echo 'App\\\\\\\\Models\\\\\\\\Doctor';\")",
+      "Bash(ls \"\\\\\\\\wsl.localhost\\\\ubuntu-24.04\\\\home\\\\masterdba6\\\\projetos\\\\clava-api\")",
+      "Bash(find \"/mnt/c/Users/Robson/Desktop/frontend-web/clavaconsult/src/routes\" -name \"*.tsx\" | sort)"
     ]
   }
 }

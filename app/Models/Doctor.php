@@ -85,4 +85,9 @@ class Doctor extends Model
             ->withPivot('consultation_value')
             ->withTimestamps();
     }
+
+    public function information(): HasMany
+    {
+        return $this->hasMany(DoctorInformation::class);
+    }
 }

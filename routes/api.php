@@ -23,6 +23,7 @@ use App\Http\Controllers\UnitBusinessHoursController;
 use App\Http\Controllers\UnitRoomController;
 use App\Http\Controllers\UpdatePasswordController;
 use App\Http\Controllers\DoctorPlanController;
+use App\Http\Controllers\DoctorInformationController;
 use App\Http\Controllers\WorkTimeController;
 use App\Http\Resources\UserResource;
 use App\Jobs\ImportReportsFromJson;
@@ -156,6 +157,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/doctors/{doctor}/plans', [DoctorPlanController::class, 'store']);
     Route::put('/doctors/{doctor}/plans/{plan}', [DoctorPlanController::class, 'update']);
     Route::delete('/doctors/{doctor}/plans/{plan}', [DoctorPlanController::class, 'destroy']);
+
+    Route::get('/doctors/{doctor}/information', [DoctorInformationController::class, 'index']);
+    Route::post('/doctors/{doctor}/information', [DoctorInformationController::class, 'store']);
+    Route::put('/doctors/{doctor}/information/{information}', [DoctorInformationController::class, 'update']);
+    Route::delete('/doctors/{doctor}/information/{information}', [DoctorInformationController::class, 'destroy']);
 
     Route::get('/doctors/{doctor}/work-times', [WorkTimeController::class, 'index']);
     Route::post('/doctors/{doctor}/work-times', [WorkTimeController::class, 'store']);
