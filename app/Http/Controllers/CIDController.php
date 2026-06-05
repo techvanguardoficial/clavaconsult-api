@@ -11,12 +11,16 @@ class CIDController extends Controller
 {
     public function index(Request $request): AnonymousResourceCollection
     {
-        $cids = CID::query();
+        $query = CID::query();
 
-        if ($request->query('search')) {
-            $cids->where('description', 'like', sprintf('%%%s%%', $request->query('search')));
+        if ($search = $request->query('search')) {
+            $like = sprintf('%%%s%%', $search);
+            $query->where(function ($q) use ($like) {
+                $q->where('code', 'like', $like)
+                  ->orWhere('description', 'like', $like);
+            });
         }
 
-        return CIDResource::collection($cids->get());
+        return CIDResource::collection($query->limit(50)->get());
     }
 }

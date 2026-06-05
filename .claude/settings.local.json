@@ -15,7 +15,14 @@
       "Bash(grep -n \"HasMany\\\\|hasMany\\\\|information\" /mnt/c/wsl.localhost/ubuntu-24.04/home/masterdba6/projetos/clava-api/app/Models/Doctor.php | tail -10)",
       "Bash(grep -n \"HasMany\\\\|hasMany\\\\|class Employee\" /mnt/c/wsl.localhost/ubuntu-24.04/home/masterdba6/projetos/clava-api/app/Models/Employee.php | head -10)",
       "Bash(cd \"\\\\\\\\wsl.localhost\\\\ubuntu-24.04\\\\home\\\\masterdba6\\\\projetos\\\\clava-api\")",
-      "Bash(docker compose *)"
+      "Bash(docker compose *)",
+      "Bash(grep -n \"cids\\\\|CidSelect\\\\|api.cids\" \"C:/Users/Robson/Desktop/frontend-web/clavaconsult/src/routes/_authenticated/patient-records.\\\\$patientId.tsx\" | head -20)",
+      "Bash(grep -n \"enabled: open\" \"C:/Users/Robson/Desktop/frontend-web/clavaconsult/src/routes/_authenticated/consultation.\\\\$appointmentId.tsx\")",
+      "Bash(bun add *)",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(npx pwa-assets-generator *)",
+      "Bash(node -e ' *)"
     ]
   }
 }
