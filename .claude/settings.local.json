@@ -22,7 +22,12 @@
       "Bash(npm install *)",
       "Bash(npm run *)",
       "Bash(npx pwa-assets-generator *)",
-      "Bash(node -e ' *)"
+      "Bash(node -e ' *)",
+      "WebFetch(domain:docs.evolutionfoundation.com.br)",
+      "Bash(cat \"\\\\\\\\wsl.localhost\\\\ubuntu-24.04\\\\home\\\\masterdba6\\\\projetos\\\\clava-api\\\\.env\")",
+      "Bash(grep -n \"class UnitAddressesController\\\\|fillable\\\\|evolution\" \"\\\\\\\\wsl.localhost\\\\ubuntu-24.04\\\\home\\\\masterdba6\\\\projetos\\\\clava-api\\\\app\\\\Http\\\\Controllers\\\\UnitAddressesController.php\")",
+      "Bash(grep -n \"fillable\\\\|evolution\" \"\\\\\\\\wsl.localhost\\\\ubuntu-24.04\\\\home\\\\masterdba6\\\\projetos\\\\clava-api\\\\app\\\\Models\\\\UnitAddress.php\")",
+      "Bash(tail -30 \"\\\\\\\\wsl.localhost\\\\ubuntu-24.04\\\\home\\\\masterdba6\\\\projetos\\\\clava-api\\\\storage\\\\logs\\\\laravel.log\")"
     ]
   }
 }

@@ -23,8 +23,10 @@ class UnitAddressResource extends JsonResource
             'neighborhood'   => $this->neighborhood,
             'city'           => $this->city,
             'state'          => $this->state,
-            'zip_code'       => $this->zip_code,
-            'business_hours' => UnitBusinessHourResource::collection($this->businessHours),
+            'zip_code'               => $this->zip_code,
+            'evolution_instance_id'  => $this->evolution_instance_id,
+            'evolution_token'        => $this->evolution_token,
+            'business_hours'         => UnitBusinessHourResource::collection($this->businessHours),
             'created_at'     => $this->created_at,
             'updated_at'     => $this->updated_at,
         ];

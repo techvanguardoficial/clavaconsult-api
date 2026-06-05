@@ -24,6 +24,7 @@ use App\Http\Controllers\UnitRoomController;
 use App\Http\Controllers\UpdatePasswordController;
 use App\Http\Controllers\DoctorPlanController;
 use App\Http\Controllers\DoctorInformationController;
+use App\Http\Controllers\EvolutionGoController;
 use App\Http\Controllers\WorkTimeController;
 use App\Http\Resources\UserResource;
 use App\Jobs\ImportReportsFromJson;
@@ -175,6 +176,20 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('doctors/{doctor}/report-config', [ReportConfigController::class, 'show']);
 
     Route::get('cids', [CIDController::class, 'index']);
+
+    // ── Evolution Go (WhatsApp) ───────────────────────────────────────────────
+    Route::prefix('evolution')->group(function () {
+        // Listagem global
+        Route::get('/', [EvolutionGoController::class, 'index']);
+
+        // Operações por unidade
+        Route::post  ('/units/{unit}',            [EvolutionGoController::class, 'storeForUnit']);
+        Route::post  ('/units/{unit}/connect',    [EvolutionGoController::class, 'connectUnit']);
+        Route::post  ('/units/{unit}/disconnect', [EvolutionGoController::class, 'disconnectUnit']);
+        Route::delete('/units/{unit}',            [EvolutionGoController::class, 'destroyUnit']);
+        Route::get   ('/units/{unit}/qr',         [EvolutionGoController::class, 'qrCodeUnit']);
+        Route::get   ('/units/{unit}/status',     [EvolutionGoController::class, 'statusUnit']);
+    });
 
     Route::post('medical-reports', [MedicalReportController::class, 'store']);
 

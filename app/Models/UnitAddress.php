@@ -24,6 +24,8 @@ class UnitAddress extends Model
         'city',
         'state',
         'zip_code',
+        'evolution_instance_id',
+        'evolution_token',
     ];
 
     public function company(): BelongsTo
