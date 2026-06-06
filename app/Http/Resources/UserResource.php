@@ -22,6 +22,7 @@ class UserResource extends JsonResource
                 return [
                     'id' => $this->profile->id, // TODO: Por enquanto o ID é o do usuário relacionado.
                     'name' => $this->name,
+                    'company_name' => $this->company_name,
                     'email' => $this->email,
                     'role' => $this->type,
                     'admin' => $this->admin,

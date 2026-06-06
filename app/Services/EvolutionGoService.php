@@ -87,12 +87,14 @@ class EvolutionGoService
         string $instanceApiKey,
         bool $immediate = false,
         ?string $phone = null,
-        ?string $webhookUrl = null
+        ?string $webhookUrl = null,
+        ?array $subscribe = null,
     ): array {
         $payload = array_filter([
             'immediate'  => $immediate,
             'phone'      => $phone,
             'webhookUrl' => $webhookUrl,
+            'subscribe'  => $subscribe,
         ], fn ($v) => $v !== null);
 
         return $this->handle(

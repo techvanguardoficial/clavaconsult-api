@@ -20,6 +20,7 @@ Route::middleware('bot.key')->prefix('bot')->group(function () {
     Route::get('/specialties', [BotController::class, 'specialties']);
 
     // Médicos por especialidade  →  ?specialty_id=X
+    // Médico por ID           →  ?doctor_id=X
     Route::get('/doctors', [BotController::class, 'doctors']);
 
     // Horários disponíveis  →  ?date=Y-m-d&duration=30

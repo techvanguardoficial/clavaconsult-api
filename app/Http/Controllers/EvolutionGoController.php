@@ -52,14 +52,24 @@ class EvolutionGoController extends Controller
 
     // ── Conectar instância de uma unidade (retorna QR code) ───────────────────
 
-    public function connectUnit(UnitAddress $unit): JsonResponse
+    public function connectUnit(Request $request, UnitAddress $unit): JsonResponse
     {
         if (!$unit->evolution_token) {
             return response()->json(['message' => 'Unidade não possui instância vinculada.'], 404);
         }
 
+        $data = $request->validate([
+            'webhook_url' => 'nullable|url',
+            'subscribe'   => 'nullable|array',
+            'subscribe.*' => 'string',
+        ]);
+
         return $this->respond(
-            fn () => $this->evolution->connectInstance(instanceApiKey: $unit->evolution_token)
+            fn () => $this->evolution->connectInstance(
+                instanceApiKey: $unit->evolution_token,
+                webhookUrl:     $data['webhook_url'] ?? null,
+                subscribe:      $data['subscribe'] ?? null,
+            )
         );
     }
 

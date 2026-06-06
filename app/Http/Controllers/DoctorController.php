@@ -76,6 +76,7 @@ class DoctorController extends Controller
     {
         $input = $request->validate([
             'name' => ['required', 'string', 'min:3', 'max:255'],
+            'company_name' => ['string', 'min:3', 'max:255'],
             'email' => ['required', 'string', 'max:255', 'email', 'unique:users'],
             'password' => ['required', 'string', 'max:255'],
             'admin' => ['required', 'boolean'],
@@ -115,6 +116,7 @@ class DoctorController extends Controller
     {
         $input = $request->validate([
             'name' => ['sometimes', 'string', 'min:3', 'max:255'],
+            'company_name' => ['sometimes', 'string', 'min:3', 'max:255'],
             'email' => ['sometimes', 'string', 'max:255', 'email', Rule::unique('users')->ignore($doctor->user->id)],
             'admin' => ['sometimes', 'boolean'],
             'cpf' => ['sometimes', 'string', 'max:255', Rule::unique('doctors')->ignore($doctor->id)],

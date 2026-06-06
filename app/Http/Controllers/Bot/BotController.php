@@ -43,10 +43,45 @@ class BotController extends Controller
     public function doctors(Request $request): JsonResponse
     {
         $request->validate([
-            'specialty_id' => ['required', 'exists:specialties,id'],
+            'specialty_id' => ['required_without:doctor_id', 'exists:specialties,id'],
+            'doctor_id'    => ['required_without:specialty_id', 'exists:doctors,id'],
         ]);
 
-        $doctors = Doctor::with('user:id,name,type,profile_id')
+        // Busca por ID específico
+        if ($request->filled('doctor_id')) {
+            $doctor = Doctor::with(['user', 'specialty', 'plans', 'workTimes', 'information'])
+                ->findOrFail($request->query('doctor_id'));
+
+            return response()->json([
+                'id'        => $doctor->id,
+                'name'      => $doctor->user?->name,
+                'specialty' => $doctor->specialty ? [
+                    'id'   => $doctor->specialty->id,
+                    'name' => $doctor->specialty->name,
+                ] : null,
+                'plans' => $doctor->plans->map(fn($p) => [
+                    'id'                 => $p->id,
+                    'name'               => $p->name,
+                    'consultation_value' => $p->pivot->consultation_value ?? null,
+                ]),
+                'work_times' => $doctor->workTimes->map(fn($w) => [
+                    'day_of_week' => $w->day_of_week,
+                    'period'      => $w->period,
+                    'start_time'  => $w->start_time,
+                    'end_time'    => $w->end_time,
+                ]),
+                'information' => $doctor->information
+                    ->where('active', true)
+                    ->map(fn($i) => [
+                        'id'          => $i->id,
+                        'key'         => $i->key,
+                        'information' => $i->information,
+                    ]),
+            ]);
+        }
+
+        // Listagem por especialidade
+        $doctors = Doctor::with('user:id,name')
             ->where('specialty_id', $request->query('specialty_id'))
             ->orderBy('id')
             ->get();
