@@ -77,6 +77,10 @@ class BotController extends Controller
                         'key'         => $i->key,
                         'information' => $i->information,
                     ]),
+                'schedule_config' => $doctor->scheduleConfig ? [
+                    'id' => $doctor->scheduleConfig->id,
+                    'config' => $doctor->scheduleConfig->config,
+                ] : null,
             ]);
         }
 

@@ -32,7 +32,8 @@
       "Bash(find /home -type d -name \"*api*\" -o -name \"*backend*\" 2>/dev/null | head -10)",
       "Bash(find \"C:\\\\Users\\\\Robson\" -type d -name \"*clava*\" -o -name \"*api*\" 2>/dev/null | grep -i \"clava\\\\|api\" | head -20)",
       "PowerShell(head -20)",
-      "Bash(find /mnt/c -type d -name \"clava-api\" 2>/dev/null | head -5)"
+      "Bash(find /mnt/c -type d -name \"clava-api\" 2>/dev/null | head -5)",
+      "PowerShell(wsl -d Ubuntu-24.04 -- bash -c \"cd /home/masterdba6/projetos/clava-api && php artisan route:clear && php artisan route:list --path=bot/doctors\")"
     ]
   }
 }
