@@ -81,7 +81,7 @@ class BotController extends Controller
         }
 
         // Listagem por especialidade
-        $doctors = Doctor::with('user:id,name')
+        $doctors = Doctor::with('user')
             ->where('specialty_id', $request->query('specialty_id'))
             ->orderBy('id')
             ->get();
