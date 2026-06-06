@@ -9,10 +9,10 @@ use Illuminate\Http\JsonResponse;
 
 class AppointmentLogController extends Controller
 {
-    public static function log(int $appointmentId, string $actionType): void
+    public static function log(int $appointmentId, string $actionType, int $userId): void
     {
         AppointmentLog::create([
-            'user_id'        => auth()->id(),
+            'user_id'        => auth()->id() ?? $userId, // Usa o ID do usuário autenticado ou o fornecido como fallback
             'appointment_id' => $appointmentId,
             'action_type'    => $actionType,
         ]);

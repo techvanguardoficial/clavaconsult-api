@@ -227,6 +227,7 @@ class BotController extends Controller
             'plan_id'    => ['required', 'exists:plans,id'],
             'type'       => ['required', 'string', 'in:first,default,return,free'],
             'comment'    => ['nullable', 'string', 'max:255'],
+            'user_id'   => ['required', 'exists:users,id'],
         ]);
 
         $input['duration'] = $input['duration'] ?? '00:30';
@@ -237,7 +238,7 @@ class BotController extends Controller
         $event = new Event(array_merge($input, ['doctor_id' => $doctor->id]));
         $appointment->event()->save($event);
 
-        AppointmentLogController::log($appointment->id, 'create');
+        AppointmentLogController::log($appointment->id, 'create', $input['user_id']);
         ScheduleUpdated::dispatch($doctor);
 
         return response()->json([
