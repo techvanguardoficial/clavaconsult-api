@@ -27,7 +27,12 @@
       "Bash(cat \"\\\\\\\\wsl.localhost\\\\ubuntu-24.04\\\\home\\\\masterdba6\\\\projetos\\\\clava-api\\\\.env\")",
       "Bash(grep -n \"class UnitAddressesController\\\\|fillable\\\\|evolution\" \"\\\\\\\\wsl.localhost\\\\ubuntu-24.04\\\\home\\\\masterdba6\\\\projetos\\\\clava-api\\\\app\\\\Http\\\\Controllers\\\\UnitAddressesController.php\")",
       "Bash(grep -n \"fillable\\\\|evolution\" \"\\\\\\\\wsl.localhost\\\\ubuntu-24.04\\\\home\\\\masterdba6\\\\projetos\\\\clava-api\\\\app\\\\Models\\\\UnitAddress.php\")",
-      "Bash(tail -30 \"\\\\\\\\wsl.localhost\\\\ubuntu-24.04\\\\home\\\\masterdba6\\\\projetos\\\\clava-api\\\\storage\\\\logs\\\\laravel.log\")"
+      "Bash(tail -30 \"\\\\\\\\wsl.localhost\\\\ubuntu-24.04\\\\home\\\\masterdba6\\\\projetos\\\\clava-api\\\\storage\\\\logs\\\\laravel.log\")",
+      "Bash(grep -E \"\\\\.\\(tsx|ts\\)$\")",
+      "Bash(find /home -type d -name \"*api*\" -o -name \"*backend*\" 2>/dev/null | head -10)",
+      "Bash(find \"C:\\\\Users\\\\Robson\" -type d -name \"*clava*\" -o -name \"*api*\" 2>/dev/null | grep -i \"clava\\\\|api\" | head -20)",
+      "PowerShell(head -20)",
+      "Bash(find /mnt/c -type d -name \"clava-api\" 2>/dev/null | head -5)"
     ]
   }
 }

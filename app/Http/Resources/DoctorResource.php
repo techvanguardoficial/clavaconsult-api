@@ -49,6 +49,10 @@ class DoctorResource extends JsonResource
                 $this->relationLoaded('csatResponses'),
                 fn() => $this->csatResponses->count()
             ),
+            'schedule_config' => $this->when(
+                $this->relationLoaded('scheduleConfig'),
+                fn() => new DoctorScheduleConfigResource($this->scheduleConfig)
+            ),
         ];
     }
 }

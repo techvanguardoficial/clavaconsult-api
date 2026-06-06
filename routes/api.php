@@ -25,6 +25,7 @@ use App\Http\Controllers\UpdatePasswordController;
 use App\Http\Controllers\DoctorPlanController;
 use App\Http\Controllers\DoctorInformationController;
 use App\Http\Controllers\EvolutionGoController;
+use App\Http\Controllers\DoctorScheduleConfigController;
 use App\Http\Controllers\WorkTimeController;
 use App\Http\Resources\UserResource;
 use App\Jobs\ImportReportsFromJson;
@@ -174,6 +175,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Retorna configurações do prontuário para o médico.
     Route::get('doctors/{doctor}/report-config', [ReportConfigController::class, 'show']);
+
+    Route::get('/doctors/{doctor}/schedule-config', [DoctorScheduleConfigController::class, 'show']);
+    Route::put('/doctors/{doctor}/schedule-config', [DoctorScheduleConfigController::class, 'update']);
 
     Route::get('cids', [CIDController::class, 'index']);
 
