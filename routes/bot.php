@@ -3,6 +3,7 @@
 use App\Http\Controllers\Bot\BotController;
 use App\Http\Controllers\Bot\BotSessionController;
 use App\Http\Controllers\Bot\CsatController;
+use App\Http\Controllers\Bot\WhatsappWhiteListController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -56,4 +57,8 @@ Route::middleware('bot.key')->prefix('bot')->group(function () {
 
     // CSAT — avaliações de atendimento
     Route::post('/csat', [CsatController::class, 'store']);
+
+    // WhatsApp White Lists
+    Route::get('/whatsapp-white-lists', [WhatsappWhiteListController::class, 'index']);
+    
 });
