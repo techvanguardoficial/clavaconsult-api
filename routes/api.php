@@ -14,6 +14,7 @@ use App\Http\Controllers\PatientController;
 use App\Http\Controllers\PatientMedicalReportController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PlanController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportConfigController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SpecialtyController;
@@ -67,6 +68,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
         return new UserResource($request->user());
     });
+
+    Route::get('/profile', [ProfileController::class, 'show']);
+    Route::put('/profile', [ProfileController::class, 'update']);
+    Route::put('/profile/change-password', [ProfileController::class, 'changePassword']);
 
     Route::get('/specialties', [SpecialtyController::class, 'index'])->can('viewAny', Specialty::class);
     Route::get('/specialties/{specialty}', [SpecialtyController::class, 'show'])->can('view', Specialty::class);

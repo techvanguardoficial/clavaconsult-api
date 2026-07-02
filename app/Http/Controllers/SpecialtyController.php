@@ -30,9 +30,9 @@ class SpecialtyController extends Controller
             $specialties->whereHas('doctors', fn($q) => $q->where('unit_addresses_id', $unitAddressId));
         }
 
-        $specialties->orderBy('name');
+        $specialties->orderBy('name')->orderBy('id');
 
-        return SpecialtyResource::collection($specialties->get());
+        return SpecialtyResource::collection($specialties->cursorPaginate(25)->withQueryString());
     }
 
     /**
@@ -51,7 +51,8 @@ class SpecialtyController extends Controller
     public function store(Request $request): SpecialtyResource
     {
         $input = $request->validate([
-            'name' => ['required', 'string', 'min:3', 'max:255']
+            'name' => ['required', 'string', 'min:3', 'max:255'],
+            'actuation' => ['nullable', 'string', 'max:255']
         ]);
 
         $specialty = Specialty::create($input);
@@ -62,7 +63,8 @@ class SpecialtyController extends Controller
     public function update(Specialty $specialty, Request $request): SpecialtyResource
     {
         $input = $request->validate([
-            'name' => ['required', 'string', 'min:3', 'max:255']
+            'name' => ['required', 'string', 'min:3', 'max:255'],
+            'actuation' => ['nullable', 'string', 'max:255']
         ]);
 
         $specialty->update($input);

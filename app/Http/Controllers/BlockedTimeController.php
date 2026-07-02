@@ -7,29 +7,29 @@ use App\Http\Resources\UnavailableTimeResource;
 use App\Models\BlockedTime;
 use App\Models\Doctor;
 use App\Models\Event;
-use Illuminate\Contracts\Pagination\CursorPaginator;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class BlockedTimeController extends Controller
 {
     /**
-     * @return CursorPaginator
+     * @return AnonymousResourceCollection
      */
-    public function index(): CursorPaginator
+    public function index(): AnonymousResourceCollection
     {
-        $dbQuery = BlockedTime::query();
+        $dbQuery = BlockedTime::with('event.doctor')->orderByDesc('id');
 
-        return $dbQuery->cursorPaginate(25)->withQueryString();
+        return UnavailableTimeResource::collection($dbQuery->cursorPaginate(25)->withQueryString());
     }
 
     /**
      * @param BlockedTime $unavailableTime
-     * @return BlockedTime
+     * @return UnavailableTimeResource
      */
-    public function show(BlockedTime $unavailableTime): BlockedTime
+    public function show(BlockedTime $unavailableTime): UnavailableTimeResource
     {
-        return $unavailableTime;
+        return new UnavailableTimeResource($unavailableTime->load('event.doctor'));
     }
 
     /**
@@ -60,9 +60,9 @@ class BlockedTimeController extends Controller
     /**
      * @param BlockedTime $unavailableTime
      * @param Request $request
-     * @return BlockedTime
+     * @return UnavailableTimeResource
      */
-    public function update(BlockedTime $unavailableTime, Request $request): BlockedTime
+    public function update(BlockedTime $unavailableTime, Request $request): UnavailableTimeResource
     {
         $input = $request->validate([
             'date' => ['required', 'string', 'date_format:Y-m-d'],
@@ -76,7 +76,7 @@ class BlockedTimeController extends Controller
 
         ScheduleUpdated::dispatch($unavailableTime->event->doctor);
 
-        return $unavailableTime;
+        return new UnavailableTimeResource($unavailableTime->fresh('event.doctor'));
     }
 
     /**

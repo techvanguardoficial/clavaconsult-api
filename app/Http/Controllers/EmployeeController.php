@@ -15,12 +15,19 @@ class EmployeeController extends Controller
 {
     public function index(Request $request): AnonymousResourceCollection
     {
-        $dbQuery = Employee::query();
+        $dbQuery = Employee::query()
+            ->join('users', function ($join) {
+                $join->on('users.profile_id', '=', 'employees.id')
+                    ->where('users.type', '=', 'employee');
+            })
+            ->select('employees.*', 'users.name as name')
+            ->orderBy('users.name')
+            ->orderBy('employees.id');
 
         if ($request->query('search')) {
-            $dbQuery->whereHas('user', function (Builder $dbQuery) use ($request) {
-                $dbQuery->where('name', 'like', sprintf('%s%%', $request->query('search')));
-                $dbQuery->orWhere('email', 'like', sprintf('%s%%', $request->query('search')));
+            $dbQuery->where(function (Builder $query) use ($request) {
+                $query->where('users.name', 'like', sprintf('%s%%', $request->query('search')));
+                $query->orWhere('users.email', 'like', sprintf('%s%%', $request->query('search')));
             });
         }
 
@@ -65,8 +72,12 @@ class EmployeeController extends Controller
         return new EmployeeResource($employee);
     }
 
-    public function destroy(Employee $employee): Response
+    public function destroy(Employee $employee, Request $request): Response
     {
+        if ($employee->user && $request->user()?->is($employee->user)) {
+            abort(422, 'Não é possível excluir o próprio usuário.');
+        }
+
         $employee->user->delete();
         $employee->delete();
 

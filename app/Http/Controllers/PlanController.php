@@ -17,7 +17,7 @@ class PlanController extends Controller
      */
     public function index(Request $request): AnonymousResourceCollection
     {
-        $dbQuery = Plan::query();
+        $dbQuery = Plan::query()->orderBy('name')->orderBy('id');
 
         if ($request->query('search')) {
             $dbQuery->where('name', 'like', sprintf('%s%%', $request->query('search')));

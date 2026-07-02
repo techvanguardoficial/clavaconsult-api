@@ -17,6 +17,7 @@ class UnavailableTimeResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'doctor_id' => $this->event->doctor_id,
             'date' => $this->event->date,
             'time' => $this->event->time,
             'duration' => $this->event->duration,
